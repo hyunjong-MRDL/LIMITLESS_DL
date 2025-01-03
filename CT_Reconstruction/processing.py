@@ -7,7 +7,7 @@ def window_per_slice(slice_data): # 2D data [ [x1, y1], [x2, y2], [...] ]
     y_max, y_min = np.max(np.array(y)), np.min(np.array(y))
     return x_max-x_min, y_max-y_min
 
-def find_window_size(ROI_contours):
+def total_window_list(ROI_contours):
     slice_size = len(ROI_contours)
     wx_list, wy_list = [], []
     for slice in range(slice_size):
@@ -15,13 +15,22 @@ def find_window_size(ROI_contours):
         curr_wx, curr_wy = window_per_slice(curr_slice)
         wx_list.append(curr_wx)
         wy_list.append(curr_wy)
-    return np.max(np.array(wx_list)), np.max(np.array(wy_list))
+    return wx_list, wy_list
 
-def find_center_point():
-    return
+def window_size(wx_list, wy_list, spacing):
+    wx_max, wx_min = np.max(np.array(wx_list)), np.min(np.array(wx_list))
+    wy_max, wy_min = np.max(np.array(wy_list)), np.min(np.array(wy_list))
+    return int(wx_max-wx_min)/spacing, int(wy_max-wy_min)/spacing
 
-def imaging_from_coords():
-    return
+def per_slice_mapping(slice_data, w_size, center, spacing):
+    reshaped_points = np.array(slice_data).reshape(-1, 3)
+    x, y = reshaped_points[:, 0], reshaped_points[:, 1]
+
+    image = np.zeros(w_size)
+    for i in range(len(x)):
+        x_pos, y_pos = int( (x[i] - center[0]) / spacing ), int( (y[i] - center[1]) / spacing )
+        image[x_pos, y_pos] = 1
+    return image
 
 """
 def rasterize_contour(contour_points):

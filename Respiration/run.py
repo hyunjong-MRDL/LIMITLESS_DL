@@ -1,42 +1,42 @@
-from utils import construct_total_dict, createFolder
-from processing import merge_data, split_beams
-from plot import plot_by_index
-from metric import average_level, calc_reprod, maximum_change, calc_stab
+import data, utils, processing, metric
+import numpy as np
 
-if __name__ == "__main__":
+root = 'E:/Deep_Learning/Respiration/'
+data_root = f"{root}DATA/"
+plot_root = f"{root}PLOT/"
 
-    root = './DATA/'
-    breathhold_dict, full_dict = construct_total_dict(root)
-    createFolder(f"./Plots/Breathhold")
-    createFolder(f"./Plots/Full")
+while True:
+    proceed = int(input("Please enter '1' if you want to proceed, or enter '0': "))
+    if proceed == 0: break
+    treatment = input("Desired Treatment Method [Type 'STATIC' or 'ARC']: ")
+    breath = input("Desired Breath Type: [Type 'Breathhold' or 'FULL']: ")
 
-    scan_list = list(breathhold_dict.keys())
-    for scan_num in scan_list:
-        b_Time, b_Amp, b_Beams, b_States = merge_data(breathhold_dict, scan_num)
-        f_Time, f_Amp, f_Beams, f_States = merge_data(full_dict, scan_num)
-        b_timedict, b_beamdict = split_beams(b_Time, b_Amp, b_Beams, b_States)
-        f_timedict, f_beamdict = split_beams(f_Time, f_Amp, f_Beams, f_States)
+    patient_path, num_fx = data.patient_path(data_root, treatment, breath)
+    for fx in range(1, num_fx+1):
+        print(f"=====Fraction{fx}=====")
+        fraction_path, num_fld = data.fraction_path(patient_path, fx)
+        fx_reprods, fx_stabs = [], []
+        for field in range(1, num_fld+1):
+            print(f"=====Field{field}=====")
+            data_Times, data_Amps = data.read_field_AP(fraction_path, field)
+            beam_Times, beam_Amps = data.read_field_beams(fraction_path, field)
+            dilated_beams = processing.dilate_beams(data_Times, beam_Times, beam_Amps)
+            cutted_amps = np.array(data_Amps) * np.array(dilated_beams)
+            enabled_intervals, num_intvs = processing.beam_enabling_intervals(data_Times, cutted_amps)
+            field_lvls, field_errors = [], []
+            for intv in range(num_intvs):
+                avg_lvl = metric.avg_lvl_per_interval(enabled_intervals[intv])
+                error = metric.error_per_interval(enabled_intervals[intv])
+                field_lvls.append(avg_lvl)
+                field_errors.append(error)
+                print(f"[Interval{intv}] Average Level: {avg_lvl}\tVertical Error: {error}")
+            reprod = metric.reprod_per_field(field_lvls)
+            stab = metric.stab_per_field(field_errors)
+            fx_reprods.append(reprod)
+            fx_stabs.append(stab)
+            print(f"Reproducibility: {reprod}\tStability: {stab}")
+        mean_reprod = metric.mean_reprod_per_fraction(fx_reprods)
+        mean_stab = metric.mean_stab_per_fraction(fx_stabs)
+        print(f"Mean Reproducibility: {mean_reprod}\tMean Stability: {mean_stab}")
 
-    b_beam_index = list(b_beamdict.keys())
-    f_beam_index = list(f_beamdict.keys())
-    b_avg_levels, f_avg_levels = [], []
-    b_dMaxs, f_dMaxs = [], []
-    for index in b_beam_index:
-        plot_by_index("Breathhold", b_timedict, b_beamdict, index)
-        plot_by_index("Full", f_timedict, f_beamdict, index)
-        # reproducibility
-        curr_b_avg_lv = average_level(b_beamdict[index])
-        b_avg_levels.append(curr_b_avg_lv)
-        curr_f_avg_lv = average_level(f_beamdict[index])
-        f_avg_levels.append(curr_f_avg_lv)
-        # stability
-        curr_b_dMax = maximum_change(b_timedict[index], b_beamdict[index])
-        b_dMaxs.append(curr_b_dMax)
-        curr_f_dMax = maximum_change(f_timedict[index], f_beamdict[index])
-        f_dMaxs.append(curr_f_dMax)
-
-    b_reprod, f_reprod = calc_reprod(b_avg_levels), calc_reprod(f_avg_levels)
-    b_stab, f_stab = calc_stab(b_dMaxs), calc_stab(f_dMaxs)
-
-    print(f"\n\n\t\t\tReproducibility\t\t\nBreathhold: {b_reprod} Full: {f_reprod}\n\n")
-    print(f"\t\t\tStability\t\t\nBreathhold: {b_stab} Full: {f_stab}")
+print("Program terminated.")

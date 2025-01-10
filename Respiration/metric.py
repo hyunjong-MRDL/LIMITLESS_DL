@@ -24,3 +24,11 @@ def stab_per_field(errors):
 
 def mean_stab_per_fraction(stabs):
     return np.mean(np.array(stabs))
+
+"""
+1 fraction 안에 있는 모든 interval을 고려:
+- reprod/stab 계산
+- mean/std 계산
+
+Fraction 간의 reprod/stab 추이 분석
+"""

@@ -15,6 +15,15 @@ def seg_path(path, method):
         if method in p: x = p
     return f"{path}{x}/"
 
+def get_CT_path(path, ID_idx, recon, seg):
+    path = f"{path}{get_IDs(path)[ID_idx]}/"
+    path = seg_path(recon_path(path, recon), seg)
+    return path, os.listdir(path)[:-1]
+
+def get_CT_structures(CT_path):
+    CT_structures = dcmread(CT_path).PixelData
+    return CT_structures
+
 """Filenames are in the order of CT0, CT1, ..., RT"""
 """            Recon: 'Aice' or 'AIDR'            """
 """       Segmentation: 'Breast' or 'Onco'        """

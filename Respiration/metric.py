@@ -24,7 +24,3 @@ def stab_per_field(errors):
 
 def mean_stab_per_fraction(stabs):
     return np.mean(np.array(stabs))
-
-# 전체 Time series에 대한 그래프를 그리면서
-# 그 위에 reproducibility와 stability를
-# 같이 plotting할 수 있을까? (그래프 부분적으로 그리기)

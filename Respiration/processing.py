@@ -3,10 +3,9 @@ def dilate_beams(data_Times, beam_Times, beam_Amps):
     dilated_beams = []
     for time in data_Times:
         if time > beam_Times[beam_index]:
+            curr_state = beam_Amps[beam_index]
             if beam_index < len(beam_Times)-1:
-                curr_state = beam_Amps[beam_index]
                 beam_index += 1
-            else: curr_state = beam_Amps[beam_index]
         dilated_beams.append(curr_state)
     return dilated_beams
 

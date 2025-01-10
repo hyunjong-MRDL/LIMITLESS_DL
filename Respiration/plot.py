@@ -1,45 +1,42 @@
-import os
+import os, utils
 from scipy.fft import fft, fftshift
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plot_by_index(data_type, time_dict, beam_dict, index):
-    Times, Amps = time_dict[index], beam_dict[index]
-    filename = f"./Plots/{data_type}/{index}.jpg"
-    if not os.path.exists(filename):
-        fft_amp = fftshift(fft(np.array(Amps)))
-        N = len(Amps)
-        fs = 1/0.015
-        freqs = np.linspace(0, N-1, N) * (fs/N)
-        fig, ax = plt.subplots(2, 1, figsize=(18, 12))
-        ax[0].plot(Times, Amps)
-        ax[0].set_title("Time domain data")
-        ax[0].set_xlabel("Time (s)"), ax[0].set_ylabel("Amplitude (cm)")
-        ax[1].plot(freqs, np.abs(fft_amp))
-        ax[1].set_title("Frequency domain data")
-        ax[1].set_xlabel("Frequency (Hz)"), ax[0].set_ylabel("Amplitude (cm)")
-        fig.savefig(filename)
-        plt.close()
+def plot_AP(plot_folder, fx, field, plot_type, data_Times, data_Amps):
+    plot_folder = f"{plot_folder}AP/{fx}/"
+    utils.createFolder(plot_folder)
     
-    else:
-        print(f"Figure already exists: {filename}")
+    filename = f"{plot_folder}{fx}fx_field{field} ({plot_type}).jpg"
 
-def plot_whole_data(data_type, Times, Amps):
-    filename = f"./Plots/{data_type}/Whole_data.jpg"
-    if not os.path.exists(filename):
-        fft_amp = fftshift(fft(np.array(Amps)))
-        N = len(Amps)
-        fs = 1/0.015
-        freqs = np.linspace(0, N-1, N) * (fs/N)
-        fig, ax = plt.subplots(2, 1, figsize=(18, 12))
-        ax[0].plot(Times, Amps)
-        ax[0].set_title("Time domain data")
-        ax[0].set_xlabel("Time (s)"), ax[0].set_ylabel("Amplitude (cm)")
-        ax[1].plot(freqs, np.abs(fft_amp))
-        ax[1].set_title("Frequency domain data")
-        ax[1].set_xlabel("Frequency (Hz)"), ax[0].set_ylabel("Amplitude (cm)")
-        fig.savefig(filename)
-        plt.close()
-    
+    if os.path.exists(filename):
+        print(f"AP Plot [{fx}fx_field{field} ({plot_type}).jpg] already exists.")
     else:
-        print(f"Figure already exists: {filename}")
+        plt.figure(figsize=(18, 12))
+        plt.plot(data_Times, data_Amps)
+        plt.title(f"{fx}fx_field{field} (AP)")
+        plt.xlabel("Time (s)"), plt.ylabel("Amplitude (cm)")
+        plt.savefig(filename)
+        print(f"AP Plot [{fx}fx_field{field} ({plot_type}).jpg] saved successfully.")
+        plt.close()
+
+def plot_FFT(plot_folder, fx, field, plot_type, data_Times, data_Amps):
+    plot_folder = f"{plot_folder}FFT/{fx}/"
+    utils.createFolder(plot_folder)
+
+    filename = f"{plot_folder}{fx}fx_field{field} ({plot_type}).jpg"
+    
+    if os.path.exists(filename):
+        print(f"FFT Plot [{fx}fx_field{field}({plot_type}).jpg] already exists.")
+    else:
+        fft_amp = fftshift(fft(np.array(data_Amps)))
+        N = len(data_Amps)
+        fs = 1 / (data_Times[1] - data_Times[0])
+        freqs = np.linspace(0, N-1, N) * (fs/N)
+        plt.figure(figsize=(18, 12))
+        plt.plot(freqs, np.abs(fft_amp))
+        plt.title(f"{fx}fx_field{field} (FFT)")
+        plt.xlabel("Frequency (Hz)"), plt.ylabel("Amplitude (cm)")
+        plt.savefig(filename)
+        print(f"FFT Plot [{fx}fx_field{field} ({plot_type}).jpg] saved successfully.")
+        plt.close()

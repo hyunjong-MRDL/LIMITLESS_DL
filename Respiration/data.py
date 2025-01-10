@@ -51,5 +51,3 @@ def read_field_beams(fraction_path, field):
             elif beam_flag and ("Enable" in line): start_flag = True
 
     return time_list, state_list
-
-## field_data, field_beams 함수 한 개로 합치는게 나을 듯

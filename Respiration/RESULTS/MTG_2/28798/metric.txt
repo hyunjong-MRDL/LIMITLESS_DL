@@ -1,0 +1,28 @@
+				=====Fraction1=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 12.1364	Vertical Error (mm): 0.0142
+Reproducibility (mm): 0.0000	Stability (mm): 0.0142
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 11.8370	Vertical Error (mm): 0.0096
+Reproducibility (mm): 0.0000	Stability (mm): 0.0096
+
+				 =====Field3=====
+[Interval0] Average Level (mm): 12.1518	Vertical Error (mm): 0.0143
+Reproducibility (mm): 0.0000	Stability (mm): 0.0143
+
+				 =====Field4=====
+[Interval0] Average Level (mm): 12.1858	Vertical Error (mm): 0.0155
+Reproducibility (mm): 0.0000	Stability (mm): 0.0155
+
+				 =====Field5=====
+[Interval0] Average Level (mm): 12.2316	Vertical Error (mm): 0.0202
+[Interval1] Average Level (mm): 13.1496	Vertical Error (mm): 0.0224
+Reproducibility (mm): 0.9181	Stability (mm): 0.0224
+
+				 =====Field6=====
+[Interval0] Average Level (mm): 12.6522	Vertical Error (mm): 0.0293
+Reproducibility (mm): 0.0000	Stability (mm): 0.0293
+
+				 =====Field7=====

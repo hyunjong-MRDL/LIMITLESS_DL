@@ -25,10 +25,22 @@ def stab_per_field(errors):
 def mean_stab_per_fraction(stabs):
     return np.mean(np.array(stabs))
 
-"""
-1 fraction 안에 있는 모든 interval을 고려:
-- reprod/stab 계산
-- mean/std 계산
+def R_squared(total_metrics):
+    slope, intercept = np.polyfit(range(1, len(total_metrics)+1), total_metrics, deg=1)
+    fitted_metrics = slope * ( range(1, len(total_metrics)+1) ) + intercept
+    mean = np.mean(total_metrics)
+    SST = np.sum( (total_metrics - mean) ** 2 )
+    SSR = np.sum( (total_metrics - fitted_metrics) **2 )
+    return 1 - SSR/SST
 
-Fraction 간의 reprod/stab 추이 분석
-"""
+def p_value(total_metrics):
+    return
+
+def coeff_var(total_metrics): # CV (coefficients of variation)
+    """CV_intra & CV_inter"""
+    mean = np.mean(total_metrics)
+    std = np.std(total_metrics)
+    return std / mean
+
+def ICC(total_metrics): # Intraclass Correlation Coefficient
+    return

@@ -3,11 +3,11 @@ from scipy.fft import fft, fftshift
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plot_AP(plot_folder, fx, field, plot_type, data_Times, data_Amps):
-    plot_folder = f"{plot_folder}AP/{fx}/"
-    utils.createFolder(plot_folder)
+def plot_AP(result_folder, fx, field, plot_type, data_Times, data_Amps):
+    result_folder = f"{result_folder}AP/{fx}/"
+    utils.createFolder(result_folder)
     
-    filename = f"{plot_folder}{fx}fx_field{field} ({plot_type}).jpg"
+    filename = f"{result_folder}{fx}fx_field{field} ({plot_type}).jpg"
 
     if os.path.exists(filename):
         print(f"AP Plot [{fx}fx_field{field} ({plot_type}).jpg] already exists.")
@@ -20,11 +20,11 @@ def plot_AP(plot_folder, fx, field, plot_type, data_Times, data_Amps):
         print(f"AP Plot [{fx}fx_field{field} ({plot_type}).jpg] saved successfully.")
         plt.close()
 
-def plot_FFT(plot_folder, fx, field, plot_type, data_Times, data_Amps):
-    plot_folder = f"{plot_folder}FFT/{fx}/"
-    utils.createFolder(plot_folder)
+def plot_FFT(result_folder, fx, field, plot_type, data_Times, data_Amps):
+    result_folder = f"{result_folder}FFT/{fx}/"
+    utils.createFolder(result_folder)
 
-    filename = f"{plot_folder}{fx}fx_field{field} ({plot_type}).jpg"
+    filename = f"{result_folder}{fx}fx_field{field} ({plot_type}).jpg"
     
     if os.path.exists(filename):
         print(f"FFT Plot [{fx}fx_field{field}({plot_type}).jpg] already exists.")

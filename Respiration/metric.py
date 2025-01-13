@@ -19,6 +19,7 @@ def error_per_interval(Amps):
     duration = dt * ( len(Amps) - 1 )
     return abs(slope) * duration
 
+'''Takes merged sequence as input'''
 def stab_per_field(errors):
     return max(errors)
 

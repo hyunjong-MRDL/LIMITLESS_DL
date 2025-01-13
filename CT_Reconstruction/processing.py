@@ -21,6 +21,7 @@ def window_size(wx_list, wy_list, spacing):
     wx_max, wx_min = np.max(np.array(wx_list)), np.min(np.array(wx_list))
     wy_max, wy_min = np.max(np.array(wy_list)), np.min(np.array(wy_list))
     return int(wx_max-wx_min)/spacing, int(wy_max-wy_min)/spacing
+### Original image size: (512, 512)
 
 def per_slice_mapping(slice_data, w_size, center, spacing):
     reshaped_points = np.array(slice_data).reshape(-1, 3)

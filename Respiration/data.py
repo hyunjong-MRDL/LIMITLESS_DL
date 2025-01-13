@@ -1,5 +1,8 @@
 import os
 
+"""Patient path"""
+"""Treatment type: (STATIC or ARC)"""
+"""Breath type: (Breathhold or FULL)"""
 def patient_path(path, treatment_type, breath_type):
     path = f"{path}{treatment_type}_treatment/"
     for folder in os.listdir(path):
@@ -7,10 +10,14 @@ def patient_path(path, treatment_type, breath_type):
         else: continue
     return path, len(os.listdir(path))
 
+"""Fraction path"""
+"""1 fraction: Whole session during ONE day"""
 def fraction_path(path, fraction):
     path = f"{path}{fraction}/"
     return path, len(os.listdir(path))
 
+"""Anterior-Posterior data"""
+"""One sequence per field"""
 def read_field_AP(fraction_path, field):
     filepath = f"{fraction_path}{os.listdir(fraction_path)[field-1]}"
     data_Times, data_Amps = [], []

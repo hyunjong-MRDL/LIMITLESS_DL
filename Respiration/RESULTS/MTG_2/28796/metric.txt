@@ -1,0 +1,569 @@
+				=====Fraction1=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.6326	Vertical Error (mm): 0.1299
+[Interval1] Average Level (mm): 18.0845	Vertical Error (mm): 0.7124
+[Interval2] Average Level (mm): 18.1441	Vertical Error (mm): 0.2956
+[Interval3] Average Level (mm): 17.9892	Vertical Error (mm): 0.0825
+Reproducibility (mm): 0.6433	Stability (mm): 0.7124
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.0123	Vertical Error (mm): 0.6890
+[Interval1] Average Level (mm): 17.9581	Vertical Error (mm): 0.2365
+[Interval2] Average Level (mm): 17.9118	Vertical Error (mm): 0.2629
+Reproducibility (mm): 0.1005	Stability (mm): 0.6890
+
+Mean Reproducibility (mm): 0.3719	Mean Stability (mm): 0.7007
+Fraction Reproducibility (mm): 0.7208	Fraction Stability (mm): 0.7124
+
+
+				=====Fraction2=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.6915	Vertical Error (mm): 0.4722
+[Interval1] Average Level (mm): 18.1551	Vertical Error (mm): 0.0260
+[Interval2] Average Level (mm): 18.0686	Vertical Error (mm): 0.8443
+Reproducibility (mm): 0.6229	Stability (mm): 0.8443
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.2848	Vertical Error (mm): 0.2614
+[Interval1] Average Level (mm): 18.8013	Vertical Error (mm): 0.4174
+[Interval2] Average Level (mm): 18.9551	Vertical Error (mm): 0.7834
+Reproducibility (mm): 0.6703	Stability (mm): 0.7834
+
+Mean Reproducibility (mm): 0.6466	Mean Stability (mm): 0.8138
+Fraction Reproducibility (mm): 0.8865	Fraction Stability (mm): 0.8443
+
+
+				=====Fraction3=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.5887	Vertical Error (mm): 0.5639
+[Interval1] Average Level (mm): 19.0612	Vertical Error (mm): 0.8935
+[Interval2] Average Level (mm): 19.3842	Vertical Error (mm): 0.1786
+Reproducibility (mm): 0.7956	Stability (mm): 0.8935
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 19.8331	Vertical Error (mm): 0.4023
+[Interval1] Average Level (mm): 18.4425	Vertical Error (mm): 1.4142
+[Interval2] Average Level (mm): 19.9436	Vertical Error (mm): 1.0439
+[Interval3] Average Level (mm): 19.4422	Vertical Error (mm): 0.7848
+Reproducibility (mm): 1.5011	Stability (mm): 1.4142
+
+Mean Reproducibility (mm): 1.1484	Mean Stability (mm): 1.1538
+Fraction Reproducibility (mm): 1.5011	Fraction Stability (mm): 1.4142
+
+
+				=====Fraction4=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.7515	Vertical Error (mm): 0.5112
+[Interval1] Average Level (mm): 19.5936	Vertical Error (mm): 0.0445
+[Interval2] Average Level (mm): 19.0292	Vertical Error (mm): 0.9344
+Reproducibility (mm): 0.8421	Stability (mm): 0.9344
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 19.0193	Vertical Error (mm): 0.0194
+[Interval1] Average Level (mm): 19.0424	Vertical Error (mm): 0.2117
+[Interval2] Average Level (mm): 18.7584	Vertical Error (mm): 0.0705
+Reproducibility (mm): 0.2840	Stability (mm): 0.2117
+
+Mean Reproducibility (mm): 0.5631	Mean Stability (mm): 0.5731
+Fraction Reproducibility (mm): 0.8421	Fraction Stability (mm): 0.9344
+
+
+				=====Fraction5=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 19.4348	Vertical Error (mm): 0.2426
+[Interval1] Average Level (mm): 18.3373	Vertical Error (mm): 0.5948
+[Interval2] Average Level (mm): 18.8546	Vertical Error (mm): 0.5105
+[Interval3] Average Level (mm): 18.3404	Vertical Error (mm): 0.9676
+Reproducibility (mm): 1.0975	Stability (mm): 0.9676
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.3440	Vertical Error (mm): 0.1340
+[Interval1] Average Level (mm): 18.4152	Vertical Error (mm): 1.1397
+[Interval2] Average Level (mm): 19.5575	Vertical Error (mm): 0.5164
+Reproducibility (mm): 1.2135	Stability (mm): 1.1397
+
+Mean Reproducibility (mm): 1.1555	Mean Stability (mm): 1.0537
+Fraction Reproducibility (mm): 1.2203	Fraction Stability (mm): 1.1397
+
+
+				=====Fraction6=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 19.2331	Vertical Error (mm): 0.7215
+[Interval1] Average Level (mm): 19.1129	Vertical Error (mm): 0.8843
+[Interval2] Average Level (mm): 18.2304	Vertical Error (mm): 0.5349
+[Interval3] Average Level (mm): 18.6234	Vertical Error (mm): 0.4758
+Reproducibility (mm): 1.0027	Stability (mm): 0.8843
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 19.3201	Vertical Error (mm): 0.4190
+[Interval1] Average Level (mm): 18.7226	Vertical Error (mm): 0.5050
+[Interval2] Average Level (mm): 19.3888	Vertical Error (mm): 0.3793
+Reproducibility (mm): 0.6662	Stability (mm): 0.5050
+
+Mean Reproducibility (mm): 0.8344	Mean Stability (mm): 0.6947
+Fraction Reproducibility (mm): 1.1584	Fraction Stability (mm): 0.8843
+
+
+				=====Fraction7=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.1222	Vertical Error (mm): 0.5591
+[Interval1] Average Level (mm): 18.3126	Vertical Error (mm): 1.0314
+[Interval2] Average Level (mm): 18.5558	Vertical Error (mm): 0.9975
+Reproducibility (mm): 0.4335	Stability (mm): 1.0314
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.6355	Vertical Error (mm): 1.1476
+[Interval1] Average Level (mm): 18.0864	Vertical Error (mm): 0.4629
+[Interval2] Average Level (mm): 18.2601	Vertical Error (mm): 0.3687
+Reproducibility (mm): 0.5491	Stability (mm): 1.1476
+
+Mean Reproducibility (mm): 0.4913	Mean Stability (mm): 1.0895
+Fraction Reproducibility (mm): 0.5491	Fraction Stability (mm): 1.1476
+
+
+				=====Fraction8=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.6521	Vertical Error (mm): 0.0109
+[Interval1] Average Level (mm): 18.4406	Vertical Error (mm): 0.2181
+[Interval2] Average Level (mm): 19.6573	Vertical Error (mm): 0.3272
+[Interval3] Average Level (mm): 19.4210	Vertical Error (mm): 0.2724
+Reproducibility (mm): 1.2166	Stability (mm): 0.3272
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 19.1655	Vertical Error (mm): 1.0314
+[Interval1] Average Level (mm): 18.7112	Vertical Error (mm): 0.4983
+[Interval2] Average Level (mm): 18.7975	Vertical Error (mm): 0.6081
+Reproducibility (mm): 0.4543	Stability (mm): 1.0314
+
+Mean Reproducibility (mm): 0.8355	Mean Stability (mm): 0.6793
+Fraction Reproducibility (mm): 1.2166	Fraction Stability (mm): 1.0314
+
+
+				=====Fraction9=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.5254	Vertical Error (mm): 0.0058
+[Interval1] Average Level (mm): 18.4011	Vertical Error (mm): 0.2219
+[Interval2] Average Level (mm): 18.3688	Vertical Error (mm): 0.1528
+[Interval3] Average Level (mm): 18.4118	Vertical Error (mm): 0.4597
+[Interval4] Average Level (mm): 19.9917	Vertical Error (mm): 0.5791
+Reproducibility (mm): 1.6229	Stability (mm): 0.5791
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 19.4914	Vertical Error (mm): 0.7578
+[Interval1] Average Level (mm): 19.4747	Vertical Error (mm): 0.1395
+[Interval2] Average Level (mm): 18.9697	Vertical Error (mm): 0.0434
+[Interval3] Average Level (mm): 18.5364	Vertical Error (mm): 0.1782
+Reproducibility (mm): 0.9550	Stability (mm): 0.7578
+
+Mean Reproducibility (mm): 1.2890	Mean Stability (mm): 0.6684
+Fraction Reproducibility (mm): 1.6229	Fraction Stability (mm): 0.7578
+
+
+				=====Fraction10=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 17.7527	Vertical Error (mm): 0.3259
+[Interval1] Average Level (mm): 18.2833	Vertical Error (mm): 0.7561
+[Interval2] Average Level (mm): 19.1213	Vertical Error (mm): 0.3361
+[Interval3] Average Level (mm): 18.3130	Vertical Error (mm): 0.2231
+Reproducibility (mm): 1.3687	Stability (mm): 0.7561
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.0636	Vertical Error (mm): 0.8918
+[Interval1] Average Level (mm): 18.5324	Vertical Error (mm): 0.7902
+[Interval2] Average Level (mm): 17.8788	Vertical Error (mm): 0.4644
+Reproducibility (mm): 0.6536	Stability (mm): 0.8918
+
+Mean Reproducibility (mm): 1.0111	Mean Stability (mm): 0.8240
+Fraction Reproducibility (mm): 1.3687	Fraction Stability (mm): 0.8918
+
+
+				=====Fraction11=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 17.8190	Vertical Error (mm): 0.7645
+[Interval1] Average Level (mm): 18.2659	Vertical Error (mm): 0.8980
+[Interval2] Average Level (mm): 18.2489	Vertical Error (mm): 0.3125
+[Interval3] Average Level (mm): 19.3954	Vertical Error (mm): 0.9016
+Reproducibility (mm): 1.5764	Stability (mm): 0.9016
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 19.3285	Vertical Error (mm): 0.0894
+[Interval1] Average Level (mm): 18.1249	Vertical Error (mm): 1.0666
+[Interval2] Average Level (mm): 18.0500	Vertical Error (mm): 0.5902
+Reproducibility (mm): 1.2785	Stability (mm): 1.0666
+
+Mean Reproducibility (mm): 1.4274	Mean Stability (mm): 0.9841
+Fraction Reproducibility (mm): 1.5764	Fraction Stability (mm): 1.0666
+
+
+				=====Fraction12=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.6151	Vertical Error (mm): 0.3043
+[Interval1] Average Level (mm): 20.5402	Vertical Error (mm): 0.8740
+[Interval2] Average Level (mm): 18.1292	Vertical Error (mm): 0.0537
+[Interval3] Average Level (mm): 18.9752	Vertical Error (mm): 0.8352
+[Interval4] Average Level (mm): 18.3235	Vertical Error (mm): 0.4854
+Reproducibility (mm): 2.4110	Stability (mm): 0.8740
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.2736	Vertical Error (mm): 1.0885
+[Interval1] Average Level (mm): 18.8072	Vertical Error (mm): 0.6408
+[Interval2] Average Level (mm): 18.8307	Vertical Error (mm): 0.7294
+Reproducibility (mm): 0.5571	Stability (mm): 1.0885
+
+Mean Reproducibility (mm): 1.4841	Mean Stability (mm): 0.9812
+Fraction Reproducibility (mm): 2.4110	Fraction Stability (mm): 1.0885
+
+
+				=====Fraction13=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.2542	Vertical Error (mm): 0.1905
+[Interval1] Average Level (mm): 18.1435	Vertical Error (mm): 0.4020
+[Interval2] Average Level (mm): 18.2517	Vertical Error (mm): 0.9168
+[Interval3] Average Level (mm): 19.0272	Vertical Error (mm): 0.6826
+Reproducibility (mm): 0.8837	Stability (mm): 0.9168
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.2913	Vertical Error (mm): 0.7837
+[Interval1] Average Level (mm): 19.1578	Vertical Error (mm): 0.5275
+[Interval2] Average Level (mm): 18.2385	Vertical Error (mm): 0.0662
+Reproducibility (mm): 0.9193	Stability (mm): 0.7837
+
+Mean Reproducibility (mm): 0.9015	Mean Stability (mm): 0.8503
+Fraction Reproducibility (mm): 1.0143	Fraction Stability (mm): 0.9168
+
+
+				=====Fraction14=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.7033	Vertical Error (mm): 0.1184
+[Interval1] Average Level (mm): 18.4862	Vertical Error (mm): 0.1812
+[Interval2] Average Level (mm): 19.9165	Vertical Error (mm): 0.1477
+[Interval3] Average Level (mm): 18.6855	Vertical Error (mm): 0.0851
+Reproducibility (mm): 1.4303	Stability (mm): 0.1812
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.4817	Vertical Error (mm): 0.5750
+[Interval1] Average Level (mm): 18.4465	Vertical Error (mm): 0.8273
+[Interval2] Average Level (mm): 18.7458	Vertical Error (mm): 0.1644
+Reproducibility (mm): 0.2993	Stability (mm): 0.8273
+
+Mean Reproducibility (mm): 0.8648	Mean Stability (mm): 0.5042
+Fraction Reproducibility (mm): 1.4700	Fraction Stability (mm): 0.8273
+
+
+				=====Fraction15=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 17.8275	Vertical Error (mm): 0.4282
+[Interval1] Average Level (mm): 17.7961	Vertical Error (mm): 0.6911
+[Interval2] Average Level (mm): 18.2810	Vertical Error (mm): 0.9340
+[Interval3] Average Level (mm): 18.1775	Vertical Error (mm): 0.7341
+Reproducibility (mm): 0.4849	Stability (mm): 0.9340
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.2814	Vertical Error (mm): 0.9950
+[Interval1] Average Level (mm): 18.0797	Vertical Error (mm): 0.7242
+Reproducibility (mm): 0.2017	Stability (mm): 0.9950
+
+Mean Reproducibility (mm): 0.3433	Mean Stability (mm): 0.9645
+Fraction Reproducibility (mm): 0.4853	Fraction Stability (mm): 0.9950
+
+
+				=====Fraction16=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 17.9971	Vertical Error (mm): 0.1994
+[Interval1] Average Level (mm): 18.2138	Vertical Error (mm): 0.6993
+[Interval2] Average Level (mm): 18.0149	Vertical Error (mm): 0.5287
+Reproducibility (mm): 0.2166	Stability (mm): 0.6993
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.1017	Vertical Error (mm): 0.6738
+[Interval1] Average Level (mm): 18.1846	Vertical Error (mm): 0.6892
+[Interval2] Average Level (mm): 18.2518	Vertical Error (mm): 0.9916
+Reproducibility (mm): 0.1501	Stability (mm): 0.9916
+
+Mean Reproducibility (mm): 0.1834	Mean Stability (mm): 0.8455
+Fraction Reproducibility (mm): 0.2547	Fraction Stability (mm): 0.9916
+
+
+				=====Fraction17=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.5266	Vertical Error (mm): 0.4115
+[Interval1] Average Level (mm): 20.2088	Vertical Error (mm): 0.9888
+[Interval2] Average Level (mm): 19.3202	Vertical Error (mm): 0.3828
+[Interval3] Average Level (mm): 18.4849	Vertical Error (mm): 0.5864
+Reproducibility (mm): 1.7239	Stability (mm): 0.9888
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.3088	Vertical Error (mm): 0.0728
+[Interval1] Average Level (mm): 19.8811	Vertical Error (mm): 0.2735
+Reproducibility (mm): 1.5723	Stability (mm): 0.2735
+
+Mean Reproducibility (mm): 1.6481	Mean Stability (mm): 0.6311
+Fraction Reproducibility (mm): 1.9000	Fraction Stability (mm): 0.9888
+
+
+				=====Fraction18=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.9214	Vertical Error (mm): 0.3448
+[Interval1] Average Level (mm): 19.9227	Vertical Error (mm): 0.4202
+[Interval2] Average Level (mm): 18.4102	Vertical Error (mm): 0.0713
+[Interval3] Average Level (mm): 18.5915	Vertical Error (mm): 0.6672
+Reproducibility (mm): 1.5125	Stability (mm): 0.6672
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.2920	Vertical Error (mm): 0.4970
+[Interval1] Average Level (mm): 18.5019	Vertical Error (mm): 0.8438
+[Interval2] Average Level (mm): 19.1219	Vertical Error (mm): 0.7527
+Reproducibility (mm): 0.8299	Stability (mm): 0.8438
+
+Mean Reproducibility (mm): 1.1712	Mean Stability (mm): 0.7555
+Fraction Reproducibility (mm): 1.6307	Fraction Stability (mm): 0.8438
+
+
+				=====Fraction19=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.6573	Vertical Error (mm): 0.4292
+[Interval1] Average Level (mm): 19.9175	Vertical Error (mm): 0.2822
+[Interval2] Average Level (mm): 18.3341	Vertical Error (mm): 0.4046
+Reproducibility (mm): 1.5834	Stability (mm): 0.4292
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.4713	Vertical Error (mm): 0.0356
+[Interval1] Average Level (mm): 19.3535	Vertical Error (mm): 0.1263
+[Interval2] Average Level (mm): 18.5039	Vertical Error (mm): 0.5520
+Reproducibility (mm): 0.8823	Stability (mm): 0.5520
+
+Mean Reproducibility (mm): 1.2328	Mean Stability (mm): 0.4906
+Fraction Reproducibility (mm): 1.5834	Fraction Stability (mm): 0.5520
+
+
+				=====Fraction20=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.5337	Vertical Error (mm): 0.7357
+[Interval1] Average Level (mm): 18.3671	Vertical Error (mm): 0.5953
+[Interval2] Average Level (mm): 18.7769	Vertical Error (mm): 0.7793
+[Interval3] Average Level (mm): 18.3940	Vertical Error (mm): 0.4589
+Reproducibility (mm): 0.4098	Stability (mm): 0.7793
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.2551	Vertical Error (mm): 0.2251
+[Interval1] Average Level (mm): 18.6135	Vertical Error (mm): 0.6102
+[Interval2] Average Level (mm): 18.3403	Vertical Error (mm): 0.7037
+[Interval3] Average Level (mm): 18.7524	Vertical Error (mm): 0.1016
+Reproducibility (mm): 0.4973	Stability (mm): 0.7037
+
+Mean Reproducibility (mm): 0.4536	Mean Stability (mm): 0.7415
+Fraction Reproducibility (mm): 0.5218	Fraction Stability (mm): 0.7793
+
+
+				=====Fraction21=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.0064	Vertical Error (mm): 0.4311
+[Interval1] Average Level (mm): 18.4168	Vertical Error (mm): 0.6760
+[Interval2] Average Level (mm): 18.4719	Vertical Error (mm): 0.1623
+[Interval3] Average Level (mm): 18.4546	Vertical Error (mm): 0.1874
+Reproducibility (mm): 0.4655	Stability (mm): 0.6760
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.3542	Vertical Error (mm): 1.1389
+[Interval1] Average Level (mm): 18.0479	Vertical Error (mm): 0.6157
+[Interval2] Average Level (mm): 18.1487	Vertical Error (mm): 0.2592
+Reproducibility (mm): 0.3063	Stability (mm): 1.1389
+
+Mean Reproducibility (mm): 0.3859	Mean Stability (mm): 0.9075
+Fraction Reproducibility (mm): 0.4655	Fraction Stability (mm): 1.1389
+
+
+				=====Fraction22=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 17.9526	Vertical Error (mm): 0.0670
+[Interval1] Average Level (mm): 18.4060	Vertical Error (mm): 0.7250
+[Interval2] Average Level (mm): 18.1407	Vertical Error (mm): 0.5915
+Reproducibility (mm): 0.4534	Stability (mm): 0.7250
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.4246	Vertical Error (mm): 0.0093
+[Interval1] Average Level (mm): 18.2132	Vertical Error (mm): 0.5754
+[Interval2] Average Level (mm): 18.1354	Vertical Error (mm): 0.6969
+Reproducibility (mm): 0.2892	Stability (mm): 0.6969
+
+Mean Reproducibility (mm): 0.3713	Mean Stability (mm): 0.7110
+Fraction Reproducibility (mm): 0.4720	Fraction Stability (mm): 0.7250
+
+
+				=====Fraction23=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.5586	Vertical Error (mm): 0.1325
+[Interval1] Average Level (mm): 18.2821	Vertical Error (mm): 0.4735
+[Interval2] Average Level (mm): 19.0734	Vertical Error (mm): 0.5944
+[Interval3] Average Level (mm): 18.1876	Vertical Error (mm): 0.6299
+Reproducibility (mm): 0.8859	Stability (mm): 0.6299
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 19.0012	Vertical Error (mm): 0.1360
+[Interval1] Average Level (mm): 18.7523	Vertical Error (mm): 0.0873
+Reproducibility (mm): 0.2489	Stability (mm): 0.1360
+
+Mean Reproducibility (mm): 0.5674	Mean Stability (mm): 0.3829
+Fraction Reproducibility (mm): 0.8859	Fraction Stability (mm): 0.6299
+
+
+				=====Fraction24=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.5777	Vertical Error (mm): 0.1094
+[Interval1] Average Level (mm): 18.6473	Vertical Error (mm): 0.7463
+[Interval2] Average Level (mm): 18.9867	Vertical Error (mm): 0.0645
+[Interval3] Average Level (mm): 18.5060	Vertical Error (mm): 0.7624
+Reproducibility (mm): 0.4808	Stability (mm): 0.7624
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 19.4961	Vertical Error (mm): 0.9348
+[Interval1] Average Level (mm): 19.6626	Vertical Error (mm): 0.2179
+[Interval2] Average Level (mm): 18.7166	Vertical Error (mm): 0.5582
+Reproducibility (mm): 0.9460	Stability (mm): 0.9348
+
+Mean Reproducibility (mm): 0.7134	Mean Stability (mm): 0.8486
+Fraction Reproducibility (mm): 1.1567	Fraction Stability (mm): 0.9348
+
+
+				=====Fraction25=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.0529	Vertical Error (mm): 0.2211
+[Interval1] Average Level (mm): 18.3914	Vertical Error (mm): 0.2714
+[Interval2] Average Level (mm): 18.5187	Vertical Error (mm): 0.5266
+[Interval3] Average Level (mm): 18.5039	Vertical Error (mm): 0.9085
+Reproducibility (mm): 0.4658	Stability (mm): 0.9085
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.3829	Vertical Error (mm): 0.9824
+[Interval1] Average Level (mm): 18.1667	Vertical Error (mm): 0.9292
+[Interval2] Average Level (mm): 18.2333	Vertical Error (mm): 0.7513
+Reproducibility (mm): 0.2162	Stability (mm): 0.9824
+
+Mean Reproducibility (mm): 0.3410	Mean Stability (mm): 0.9454
+Fraction Reproducibility (mm): 0.4658	Fraction Stability (mm): 0.9824
+
+
+				=====Fraction26=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.7646	Vertical Error (mm): 0.5986
+[Interval1] Average Level (mm): 18.3950	Vertical Error (mm): 0.8367
+[Interval2] Average Level (mm): 18.4208	Vertical Error (mm): 0.0805
+Reproducibility (mm): 0.3696	Stability (mm): 0.8367
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.2894	Vertical Error (mm): 0.9948
+[Interval1] Average Level (mm): 18.4600	Vertical Error (mm): 0.6982
+[Interval2] Average Level (mm): 18.9129	Vertical Error (mm): 0.0980
+Reproducibility (mm): 0.6235	Stability (mm): 0.9948
+
+Mean Reproducibility (mm): 0.4965	Mean Stability (mm): 0.9158
+Fraction Reproducibility (mm): 0.6235	Fraction Stability (mm): 0.9948
+
+
+				=====Fraction27=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 17.9225	Vertical Error (mm): 0.2934
+[Interval1] Average Level (mm): 18.2988	Vertical Error (mm): 0.1335
+[Interval2] Average Level (mm): 18.7015	Vertical Error (mm): 0.3727
+[Interval3] Average Level (mm): 18.7457	Vertical Error (mm): 0.1948
+Reproducibility (mm): 0.8232	Stability (mm): 0.3727
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.3545	Vertical Error (mm): 0.5620
+[Interval1] Average Level (mm): 18.0933	Vertical Error (mm): 0.0822
+Reproducibility (mm): 0.2613	Stability (mm): 0.5620
+
+Mean Reproducibility (mm): 0.5422	Mean Stability (mm): 0.4673
+Fraction Reproducibility (mm): 0.8232	Fraction Stability (mm): 0.5620
+
+
+				=====Fraction28=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.1161	Vertical Error (mm): 0.2417
+[Interval1] Average Level (mm): 19.1387	Vertical Error (mm): 0.2113
+[Interval2] Average Level (mm): 18.1652	Vertical Error (mm): 0.9397
+[Interval3] Average Level (mm): 18.0378	Vertical Error (mm): 0.4022
+Reproducibility (mm): 1.1009	Stability (mm): 0.9397
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.5099	Vertical Error (mm): 0.5226
+[Interval1] Average Level (mm): 18.6079	Vertical Error (mm): 1.0476
+[Interval2] Average Level (mm): 18.3256	Vertical Error (mm): 0.6472
+Reproducibility (mm): 0.2823	Stability (mm): 1.0476
+
+Mean Reproducibility (mm): 0.6916	Mean Stability (mm): 0.9936
+Fraction Reproducibility (mm): 1.1009	Fraction Stability (mm): 1.0476
+
+
+				=====Fraction29=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.2599	Vertical Error (mm): 0.5188
+[Interval1] Average Level (mm): 18.0667	Vertical Error (mm): 0.2499
+[Interval2] Average Level (mm): 19.0896	Vertical Error (mm): 1.5098
+Reproducibility (mm): 1.0228	Stability (mm): 1.5098
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.4397	Vertical Error (mm): 0.5566
+[Interval1] Average Level (mm): 18.6227	Vertical Error (mm): 1.0608
+[Interval2] Average Level (mm): 18.4019	Vertical Error (mm): 0.5920
+Reproducibility (mm): 0.2209	Stability (mm): 1.0608
+
+Mean Reproducibility (mm): 0.6218	Mean Stability (mm): 1.2853
+Fraction Reproducibility (mm): 1.0228	Fraction Stability (mm): 1.5098
+
+
+				=====Fraction30=====
+
+				 =====Field1=====
+[Interval0] Average Level (mm): 18.7158	Vertical Error (mm): 0.8467
+[Interval1] Average Level (mm): 19.3420	Vertical Error (mm): 0.2377
+[Interval2] Average Level (mm): 18.9352	Vertical Error (mm): 0.8030
+[Interval3] Average Level (mm): 18.5547	Vertical Error (mm): 0.1538
+Reproducibility (mm): 0.7873	Stability (mm): 0.8467
+
+				 =====Field2=====
+[Interval0] Average Level (mm): 18.5210	Vertical Error (mm): 0.2282
+[Interval1] Average Level (mm): 19.3993	Vertical Error (mm): 0.7885
+[Interval2] Average Level (mm): 18.6570	Vertical Error (mm): 0.9369
+[Interval3] Average Level (mm): 18.2302	Vertical Error (mm): 0.4052
+Reproducibility (mm): 1.1692	Stability (mm): 0.9369
+
+Mean Reproducibility (mm): 0.9782	Mean Stability (mm): 0.8918
+Fraction Reproducibility (mm): 1.1692	Fraction Stability (mm): 0.9369
+
+
+				=====R-squared=====
+Reproducibility: 0.0382	Stability: 0.0054
+
+				=====CV=====
+Reproducibility: 0.4609	Stability: 0.2232
+

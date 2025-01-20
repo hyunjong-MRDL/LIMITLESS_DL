@@ -1,4 +1,4 @@
-import data, utils, processing, metric, plot
+import data, utils, processing, metric
 import numpy as np
 
 root = 'E:/Deep_Learning/Respiration/'
@@ -6,7 +6,6 @@ data_root = f"{root}DATA/"
 result_root = f"{root}RESULTS/"
 
 num_attempts = 2 # MTG_{number}
-plot_mode = 0 # 0: Off, 1: On
 
 while True:
     proceed = int(input("Please enter '1' if you want to proceed, or enter '0': "))
@@ -33,8 +32,7 @@ while True:
             fx_lvls, fx_errors = [], [] # Avg_lvl & Vert_error for each fraction (over ALL fields) -> [avg_lvl1, avg_lvl2, ...]
             for field in range(1, num_fld+1):
                 f.write(f"\t\t\t\t =====Field{field}=====\n")
-                data_Times, data_Amps = data.read_field_AP(fraction_path, field)
-                beam_Times, beam_Amps = data.read_field_beams(fraction_path, field)
+                (data_Times, data_Amps), (beam_Times, beam_Amps) = data.read_field_data(fraction_path, field)
                 dilated_beams = processing.dilate_beams(data_Times, beam_Times, beam_Amps)
                 cutted_amps = np.array(data_Amps) * np.array(dilated_beams)
                 enabled_intervals, num_intvs = processing.beam_enabling_intervals(data_Times, cutted_amps)

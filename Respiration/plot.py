@@ -1,4 +1,4 @@
-import os, utils
+import os, utils, processing
 from scipy.fft import fft, fftshift
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,6 +19,23 @@ def plot_AP(result_folder, fx, field, plot_type, data_Times, data_Amps):
         plt.xlabel("Time (s)"), plt.ylabel("Amplitude (cm)")
         plt.savefig(filename)
         print(f"AP Plot [{fx}fx_field{field} ({plot_type}).jpg] saved successfully.")
+        plt.close()
+
+def integrated_plot(result_folder, fx, field, data_Times, cutted_Amps, dilated_line, dilated_avg):
+    result_folder = f"{result_folder}AP/{fx}/"
+    utils.createFolder(result_folder)
+    
+    filename = f"{result_folder}{fx}fx_field{field} (Integrated).jpg"
+
+    if os.path.exists(filename):
+        print(f"AP Plot [{fx}fx_field{field} (Integrated).jpg] already exists.")
+    else:
+        plt.figure(figsize=(18, 12))
+        plt.plot(data_Times, cutted_Amps), plt.plot(data_Times, dilated_line), plt.plot(data_Times, dilated_avg)
+        plt.title(f"{fx}fx_field{field} (Integrated)")
+        plt.xlabel("Time (s)"), plt.ylabel("Amplitude (cm)")
+        plt.savefig(filename)
+        print(f"AP Plot [{fx}fx_field{field} (Integrated).jpg] saved successfully.")
         plt.close()
 
 """Plot FFT of the AP data"""

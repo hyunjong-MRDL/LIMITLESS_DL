@@ -2,6 +2,8 @@ import os, data, utils, processing, metrics
 
 root = "D:/Datasets/CT_Recon/Breast/"
 
+plot_mode = False
+
 exit_flag = 1
 while True:
     exit_flag = int(input("If you want to terminate this program, please enter 0, or else enter 1: "))
@@ -31,16 +33,21 @@ while True:
     total_contours_1 = data.get_contour_data(contours_1)
     total_contours_2 = data.get_contour_data(contours_2)
 
-    roi_names_1 = utils.get_ROI_names(path_1)
-    roi_names_2 = utils.get_ROI_names(path_2)
+    roi_namedict_1 = utils.get_ROI_names(path_1)
+    roi_namedict_2 = utils.get_ROI_names(path_2)
+    print("AI_Manual:")
+    utils.print_ROI_names(roi_namedict_1)
+    print("IR_Manual:")
+    utils.print_ROI_names(roi_namedict_2)
 
-    matched_ROIs = utils.match_ROIs(roi_names_1, roi_names_2)
-    utils.print_ROI_names(matched_ROIs)
+    # matched_roi_names = utils.match_ROIs(roi_namedict_1, roi_namedict_2)
+    # utils.print_ROI_names(matched_roi_names)
 
     # ROI_num = int(input("Interested ROI number: "))
     # print()
 
-    utils.plot_coordinates(ID1, recon_1, seg_1, total_contours_1)
-    utils.plot_coordinates(ID2, recon_2, seg_2, total_contours_2)
+    if plot_mode:
+        utils.plot_coordinates(ID1, recon_1, seg_1, total_contours_1)
+        utils.plot_coordinates(ID2, recon_2, seg_2, total_contours_2)
 
 print("Program terminated.")

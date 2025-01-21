@@ -73,9 +73,9 @@ while True:
         R2_RPD, R2_STB = metric.R_squared(RPD_per_fx), metric.R_squared(STB_per_fx)
         CV_RPD, CV_STB = metric.coeff_var(RPD_per_fx), metric.coeff_var(STB_per_fx)
         f.write("\t\t\t\t=====R-squared=====\n")
-        f.write(f"Reproducibility (mm): {10*R2_RPD:.4f}\tStability (mm): {10*R2_STB:.4f}\n\n")
+        f.write(f"Reproducibility: {R2_RPD:.4f}\tStability: {R2_STB:.4f}\n\n")
         f.write("\t\t\t\t=====CV=====\n")
-        f.write(f"Reproducibility (mm): {10*CV_RPD:.4f}\tStability (mm): {10*CV_STB:.4f}\n\n")
+        f.write(f"Reproducibility: {CV_RPD:.4f}\tStability (mm): {CV_STB:.4f}\n\n")
     
     print(f"Analysis on [{patient_ID}] is complete.")
     print()

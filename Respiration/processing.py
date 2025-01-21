@@ -46,6 +46,7 @@ def regression_line(intv_Amps):
     fitted_line = [slope*t+intercept for t in Times]
     return fitted_line
 
+"""Dilate [Average level & Regression line] into SAME sequence length as [data_Times]"""
 def dilate_metrics(data_Times, beam_Times, avg_lvls, fitted_lines):
     dilated_avgs = np.zeros(len(data_Times))
     dilated_line = np.zeros(len(data_Times))

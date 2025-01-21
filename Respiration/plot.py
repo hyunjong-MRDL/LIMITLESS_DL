@@ -24,6 +24,7 @@ def plot_AP(result_folder, fx, field, plot_type, data_Times, data_Amps, savefig)
 
     plt.close()
 
+"""Plot [Cutted Amps] and [Dilated metrics] in a same figure"""
 def integrated_plot(result_folder, fx, field, data_Times, cutted_Amps, dilated_avgs, dilated_lines, savefig):
     result_folder = f"{result_folder}AP/{fx}/"
     utils.createFolder(result_folder)

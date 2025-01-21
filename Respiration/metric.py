@@ -31,7 +31,7 @@ def mean_stab_per_fraction(stabs):
     return np.mean(np.array(stabs))
 
 """Statistics"""
-def R_squared(total_metrics):
+def R_squared(dilated_avgs, dilated_lines, total_metrics):
     slope, intercept = np.polyfit(range(1, len(total_metrics)+1), total_metrics, deg=1)
     fitted_metrics = slope * ( range(1, len(total_metrics)+1) ) + intercept
     mean = np.mean(total_metrics)

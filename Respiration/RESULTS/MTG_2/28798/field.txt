@@ -1,0 +1,90 @@
+		=====Fraction1=====
+
+	  Average Levels	Vertical Errors
+Mean [mm]:	12.57459	1.12157
+STD [mm]:	0.41270	0.36333
+CV: 	3.28200%	32.39488%
+Reproducibility [mm]:	1.34798
+Stability [mm]:	1.95138
+
+		=====Fraction2=====
+
+	  Average Levels	Vertical Errors
+Mean [mm]:	12.34141	1.27044
+STD [mm]:	0.26579	0.47969
+CV: 	2.15365%	37.75786%
+Reproducibility [mm]:	0.93915
+Stability [mm]:	2.17724
+
+		=====Fraction3=====
+
+	  Average Levels	Vertical Errors
+Mean [mm]:	12.44720	1.36417
+STD [mm]:	0.43492	0.42075
+CV: 	3.49408%	30.84332%
+Reproducibility [mm]:	1.31963
+Stability [mm]:	1.90950
+
+		=====Fraction4=====
+
+	  Average Levels	Vertical Errors
+Mean [mm]:	12.18114	1.45936
+STD [mm]:	0.55267	0.59718
+CV: 	4.53709%	40.92088%
+Reproducibility [mm]:	2.04402
+Stability [mm]:	2.43647
+
+		=====Fraction5=====
+
+	  Average Levels	Vertical Errors
+Mean [mm]:	12.19487	1.18546
+STD [mm]:	0.27044	0.55224
+CV: 	2.21763%	46.58496%
+Reproducibility [mm]:	1.06475
+Stability [mm]:	2.31088
+
+		=====Fraction6=====
+
+	  Average Levels	Vertical Errors
+Mean [mm]:	12.62062	1.06561
+STD [mm]:	0.47568	0.51536
+CV: 	3.76908%	48.36320%
+Reproducibility [mm]:	1.61549
+Stability [mm]:	2.24934
+
+		=====Fraction7=====
+
+	  Average Levels	Vertical Errors
+Mean [mm]:	12.67230	1.04419
+STD [mm]:	0.44755	0.35799
+CV: 	3.53172%	34.28394%
+Reproducibility [mm]:	1.54104
+Stability [mm]:	1.67025
+
+		=====Fraction8=====
+
+	  Average Levels	Vertical Errors
+Mean [mm]:	12.25807	0.96847
+STD [mm]:	0.72508	0.48725
+CV: 	5.91513%	50.31162%
+Reproducibility [mm]:	2.69042
+Stability [mm]:	1.78336
+
+		=====Fraction9=====
+
+	  Average Levels	Vertical Errors
+Mean [mm]:	12.69606	0.98462
+STD [mm]:	0.59151	0.46494
+CV: 	4.65900%	47.22076%
+Reproducibility [mm]:	1.99153
+Stability [mm]:	2.09573
+
+		=====Fraction10=====
+
+	  Average Levels	Vertical Errors
+Mean [mm]:	12.42134	0.90059
+STD [mm]:	0.71507	0.67318
+CV: 	5.75675%	74.74840%
+Reproducibility [mm]:	3.10487
+Stability [mm]:	2.82053
+

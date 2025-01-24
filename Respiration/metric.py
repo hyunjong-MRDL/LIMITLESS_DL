@@ -31,22 +31,8 @@ def mean_stab_per_fraction(stabs):
     return np.mean(np.array(stabs))
 
 """Statistics"""
-def R_squared(dilated_avgs, dilated_lines, total_metrics):
-    slope, intercept = np.polyfit(range(1, len(total_metrics)+1), total_metrics, deg=1)
-    fitted_metrics = slope * ( range(1, len(total_metrics)+1) ) + intercept
-    mean = np.mean(total_metrics)
-    SST = np.sum( (total_metrics - mean) ** 2 )
-    SSR = np.sum( (total_metrics - fitted_metrics) **2 )
-    return 1 - SSR/SST
-
-def p_value(total_metrics):
-    return
-
 def coeff_var(total_metrics): # CV (coefficients of variation)
     """CV_intra & CV_inter"""
     mean = np.mean(total_metrics)
     std = np.std(total_metrics)
     return std / mean
-
-def ICC(total_metrics): # Intraclass Correlation Coefficient
-    return

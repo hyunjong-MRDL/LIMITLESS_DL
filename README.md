@@ -54,7 +54,7 @@
 * Purpose
     * Maintaining constant respiration during radiotherapies is crucial.
     * Respiration skills are known to be trainable.
-    * This project aims to identify that the prognosis of trained-patients was positive compared to those who did not.
+    * This project aims to identify that the prognosis of trained-patients was positive compared to untrained ones.
 * Dataset
     * Description: Time series data of patient's Anterior-Posterior movement
     * Format: Text file

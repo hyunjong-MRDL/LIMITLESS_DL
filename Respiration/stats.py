@@ -24,10 +24,12 @@ while True:
     with open(f"{result_folder}stats.txt", "w") as f:
         patient_path, num_fx = data.patient_path(data_root, treatment, breath)
         patient_ID = patient_path.split("/")[5].split("_")[0]
+        total_lvls, total_errors = [], []
 
         for fx in range(1, num_fx+1):
             f.write(f"\t\t=====Fraction{fx}=====\n\n")
             fraction_path, num_fld = data.fraction_path(patient_path, fx)
+            fraction_lvls, fraction_errors = [], []
             fx_lvl_CV, fx_err_CV = [], []
 
             for field in range(1, num_fld+1):
@@ -54,13 +56,21 @@ while True:
                 fld_err_CV = fld_std_errors/fld_mean_errors
                 f.write(f"Mean [mm]:\t{10*fld_mean_lvls:.4f}\t{10*fld_mean_errors:.4f}\n")  # cm -> mm
                 f.write(f"STD [mm]:\t{10*fld_std_lvls:.4f}\t{10*fld_std_errors:.4f}\n")  # cm -> mm
-                f.write(f"CV [mm]: \t{10*fld_lvl_CV:.4f}\t{10*fld_err_CV:.4f}\n\n")  # cm -> mm
+                f.write(f"CV: \t{100*fld_lvl_CV:.4f}%\t{100*fld_err_CV:.4f}%\n")  # Show as percentage
+                fraction_lvls.append(fld_mean_lvls)
+                fraction_errors.append(fld_mean_errors)
                 fx_lvl_CV.append(fld_lvl_CV)
                 fx_err_CV.append(fld_err_CV)
 
-            f.write(f"\t  Mean of CV for Fraction{fx}\n")
-            f.write(f"Mean_CV [mm]:\t{10*np.mean(fx_lvl_CV):.4f}\t{10*np.mean(fx_err_CV):.4f}\n\n\n")  # cm -> mm
+            total_lvls.append(np.mean(fraction_lvls))
+            total_errors.append(np.mean(fraction_errors))
+            f.write(f"\t  Total metrics for Fraction{fx}\n")
+            f.write(f"CV: \t{100*metric.coeff_var(fraction_lvls):.4f}%\t{100*metric.coeff_var(fraction_errors):.4f}%\n")
+            f.write(f"Mean_CV:\t{100*np.mean(fx_lvl_CV):.4f}\t{100*np.mean(fx_err_CV):.4f}\n")  # cm -> mm
     
+    print("\t  Average Levels\tVertical Errors\n")
+    print(f"Mean throughout 30 fractions: {10*np.mean(total_lvls):.4f}\t{10*np.mean(total_errors):.4f}")
+    print(f"CV: {100*metric.coeff_var(total_lvls):.4f}\t{100*metric.coeff_var(total_errors):.4f}")
     print(f"Analysis on [{patient_ID}] is complete.")
     print()
 

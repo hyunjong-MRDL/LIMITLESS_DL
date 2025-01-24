@@ -467,8 +467,8 @@ Fraction Reproducibility (mm): 3.1049	Fraction Stability (mm): 2.8205
 
 
 				=====R-squared=====
-Reproducibility (mm): 5.8245	Stability (mm): 0.5330
+Reproducibility: 0.5824	Stability: 0.0533
 
 				=====CV=====
-Reproducibility (mm): 3.7555	Stability (mm): 1.5009
+Reproducibility: 0.3755	Stability (mm): 0.1501
 

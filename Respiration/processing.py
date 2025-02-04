@@ -25,6 +25,27 @@ def cut_by_beams(data_Times, data_Amps, beam_Times):
 #             else: cutted_Amps[j] = 0
 #     return cutted_Amps
 
+def beam_modification(beam_Times):
+    modified_beam_Times = []
+    i = 0
+    if len(beam_Times) <= 2: return beam_Times
+    else:
+        while i < (len(beam_Times)//2):
+            if (beam_Times[2*i+1] - beam_Times[2*i]) < 10:
+                if (i == 0) or (i == len(beam_Times)//2 - 1):
+                    modified_beam_Times.append(beam_Times[2*i])
+                    modified_beam_Times.append(beam_Times[2*i+1])
+                    i += 1
+                else:
+                    modified_beam_Times.append(beam_Times[2*i])
+                    modified_beam_Times.append(beam_Times[2*i+3])
+                    i += 2
+            else:
+                modified_beam_Times.append(beam_Times[2*i])
+                modified_beam_Times.append(beam_Times[2*i+1])
+                i += 1
+        return modified_beam_Times
+
 """Sectionize beam-enabled intervals"""
 """There are more than one beam session in even one field"""
 def beam_enabling_intervals(data_Times, data_Amps, beam_Times):

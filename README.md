@@ -56,7 +56,7 @@
     * Respiration skills are known to be trainable.
     * This project aims to identify that the prognosis of trained-patients was positive compared to untrained ones.
 * Dataset
-    * Description: Time series data of patient's Anterior-Posterior movement
+    * Description: Time series data of patient's ventral movement (Anterior-Posterior)
     * Format: Text file
 
 ## **6. Autism Spectrum Disorder (Classfication)**

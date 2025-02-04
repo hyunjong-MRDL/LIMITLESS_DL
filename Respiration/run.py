@@ -5,7 +5,11 @@ root = 'E:/Deep_Learning/Respiration/'
 data_root = f"{root}DATA/"
 result_root = f"{root}RESULTS/"
 
-num_attempts = 2 # MTG_{number}
+num_attempts = 3 # MTG_{number}
+
+"""PLOT"""
+plot_mode = True
+if plot_mode: import plot
 
 while True:
     proceed = int(input("Please enter '1' if you want to proceed, or enter '0': "))
@@ -36,16 +40,17 @@ while True:
             for field in range(1, num_fld+1):
                 f.write(f"\t\t\t\t =====Field{field}=====\n")
                 (data_Times, data_Amps), (beam_Times, beam_Amps) = data.read_field_data(fraction_path, field)
+                beam_Times = processing.beam_modification(beam_Times)
                 cutted_Amps = processing.cut_by_beams(data_Times, data_Amps, beam_Times)
                 enabled_intervals, num_intvs = processing.beam_enabling_intervals(data_Times, data_Amps, beam_Times)
                 field_lvls, field_lines, field_errors = [], [], []
 
                 for intv in range(num_intvs):
                     avg_lvl = metric.avg_lvl_per_interval(enabled_intervals[intv])
-                    # fitted_line = processing.regression_line(enabled_intervals[intv])
+                    fitted_line = processing.regression_line(enabled_intervals[intv])
                     error = metric.error_per_interval(enabled_intervals[intv])
                     field_lvls.append(avg_lvl)
-                    # field_lines.append(fitted_line)
+                    field_lines.append(fitted_line)
                     field_errors.append(error)
                     fx_lvls.append(avg_lvl)
                     fx_errors.append(error)
@@ -53,8 +58,8 @@ while True:
 
                 fld_reprod = metric.reprod_per_field(field_lvls)
                 fld_stab = metric.stab_per_field(field_errors)
-                # dilated_avgs, dilated_lines = processing.dilate_metrics(data_Times, beam_Times, field_lvls, field_lines)
-                # plot.integrated_plot(result_folder, fx, field, data_Times, cutted_Amps, dilated_avgs, dilated_lines, savefig=True)
+                dilated_avgs, dilated_lines = processing.dilate_metrics(data_Times, beam_Times, field_lvls, field_lines)
+                if plot_mode: plot.integrated_plot(result_folder, fx, field, data_Times, cutted_Amps, dilated_avgs, dilated_lines, savefig=True)
                 rpds_per_fld.append(fld_reprod)
                 stbs_per_fld.append(fld_stab)
                 f.write(f"Reproducibility (mm): {10*fld_reprod:.4f}\tStability (mm): {10*fld_stab:.4f}\n\n")                 # cm -> mm
@@ -70,10 +75,7 @@ while True:
             f.write(f"Mean Reproducibility (mm): {10*fx_mean_reprod:.4f}\tMean Stability (mm): {10*fx_mean_stab:.4f}\n")     # cm -> mm
             f.write(f"Fraction Reproducibility (mm): {10*fx_rpd:.4f}\tFraction Stability (mm): {10*fx_stb:.4f}\n\n\n")       # cm -> mm
 
-        R2_RPD, R2_STB = metric.R_squared(RPD_per_fx), metric.R_squared(STB_per_fx)
         CV_RPD, CV_STB = metric.coeff_var(RPD_per_fx), metric.coeff_var(STB_per_fx)
-        f.write("\t\t\t\t=====R-squared=====\n")
-        f.write(f"Reproducibility: {R2_RPD:.4f}\tStability: {R2_STB:.4f}\n\n")
         f.write("\t\t\t\t=====CV=====\n")
         f.write(f"Reproducibility: {CV_RPD:.4f}\tStability (mm): {CV_STB:.4f}\n\n")
     

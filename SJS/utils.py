@@ -33,7 +33,8 @@ preprocessing = transforms.Compose([
 def train(X_pg, X_sg, y, model, criterion, optimizer):
     model.train()
     total_patients = list(y.keys())
-    total_correct = dict()
+    total_preds = defaultdict(list)
+    total_loss = []
     for epoch in range(CFG["EPOCHS"]):
         for patient in total_patients:
             pg_data, sg_data = [], []
@@ -43,7 +44,6 @@ def train(X_pg, X_sg, y, model, criterion, optimizer):
             if patient in X_sg.keys():
                 sg_data = X_sg[patient]
             
-            correct = 0
             if len(pg_data) > len(sg_data):
                 for i in range(len(pg_data)):
                     if i < len(sg_data):
@@ -57,14 +57,13 @@ def train(X_pg, X_sg, y, model, criterion, optimizer):
                     curr_sg = curr_sg.float().unsqueeze(0).to(device)
                     label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
 
-                    outputs = model(curr_pg, curr_sg)
-                    loss = criterion(outputs, label)
+                    output = model(curr_pg, curr_sg)
+                    total_preds[patient].append(output.detach().cpu().tolist())
+                    loss = criterion(output, label)
                     optimizer.zero_grad()
                     loss.backward()
                     optimizer.step()
-
-                    if (outputs > 0.5) and (label == 1): correct += 1
-                    elif (outputs < 0.5) and (label == 0): correct += 1
+                total_loss.append(loss)
 
             elif len(sg_data) > len(pg_data):
                 for i in range(len(sg_data)):
@@ -79,22 +78,18 @@ def train(X_pg, X_sg, y, model, criterion, optimizer):
                     curr_sg = curr_sg.float().unsqueeze(0).to(device)
                     label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
 
-                    outputs = model(curr_pg, curr_sg)
-                    loss = criterion(outputs, label)
+                    output = model(curr_pg, curr_sg)
+                    total_preds[patient].append(output.detach().cpu().tolist())
+                    loss = criterion(output, label)
                     optimizer.zero_grad()
                     loss.backward()
                     optimizer.step()
-
-                    if (outputs > 0.5) and (label == 1): correct += 1
-                    elif (outputs < 0.5) and (label == 0): correct += 1
-            
-            print(f"Patient No. {patient} is {100 * (correct / len(labels)):.5f}% probable of SJS.")
-            total_correct[patient] = (correct / len(labels))
+                total_loss.append(loss)
         
         print(f"Epoch{epoch} finished.")
 
     torch.save(model.state_dict(), CFG["save_path"])
-    return total_correct
+    return total_preds
 
 def test(X_pg, X_sg, y, model):
     model.load_state_dict(torch.load(CFG["save_path"], map_location="cuda"))
@@ -124,8 +119,8 @@ def test(X_pg, X_sg, y, model):
 
                 with torch.no_grad():
                     output = model(curr_pg, curr_sg)
-                    preds[patient].append(output)
-                    gts[patient].append(label)
+                    preds[patient].append(output.detach().cpu().tolist())
+                    gts[patient].append(label.detach().cpu().tolist())
 
         elif len(sg_data) > len(pg_data):
             for i in range(len(sg_data)):
@@ -142,10 +137,34 @@ def test(X_pg, X_sg, y, model):
 
                 with torch.no_grad():
                     output = model(curr_pg, curr_sg)
-                    preds[patient].append(output)
-                    gts[patient].append(label)
+                    preds[patient].append(output.detach().cpu().tolist())
+                    gts[patient].append(label.detach().cpu().tolist())
 
     return preds, gts
+
+## Simple arithmetic mean
+def pred_gt_by_patients(preds, gts):
+    total_IDs = list(preds.keys())
+    patient_preds, patient_gts = dict(), dict()
+    for ID in total_IDs:
+        ID_preds = preds[ID]
+        ID_gts = gts[ID]
+        ID_sum = 0
+        for i in range(len(ID_preds)):
+            curr_out = np.array(ID_preds[i]).item()
+            ID_sum += curr_out
+        patient_preds[ID] = (ID_sum / len(ID_preds))
+        patient_gts[ID] = np.array(ID_gts[0]).item()
+    
+    return patient_preds, patient_gts
+
+def preds_and_gts(preds, gts):
+    total_IDs = list(preds.keys())
+    pred_list, gt_list = [], []
+    for ID in total_IDs:
+        pred_list.append(preds[ID])
+        gt_list.append(gts[ID])
+    return pred_list, gt_list
 
 def ROC(preds, gts, SJS_size, CTR_size):
     auc = roc_auc_score(gts, preds)
@@ -158,7 +177,7 @@ def ROC(preds, gts, SJS_size, CTR_size):
     sens, spec = tpr[idx], 1-fpr[idx]
     print(best_thresh)
 
-    acc = (sens*SJS_size + spec*CTR_size) / len(gts)
+    acc = (sens*SJS_size + spec*CTR_size) / (SJS_size+CTR_size)
     auc = roc_auc_score(gts, preds)
 
     plt.title("Roc Curve")
@@ -167,6 +186,6 @@ def ROC(preds, gts, SJS_size, CTR_size):
     plt.scatter(fpr[idx], tpr[idx], marker='o', s=200, color='r',
                 label = 'Sensitivity : %.3f (%d / %d), \nSpecificity = %.3f (%d / %d), \nAUC = %.3f , \nACC = %.3f (%d / %d)' % (sens, (sens*SJS_size), SJS_size, spec, (spec*CTR_size), CTR_size, auc, acc, sens*SJS_size+spec*CTR_size, SJS_size+CTR_size))
     plt.legend()
-    plt.savefig("E:Results/SJS/Figures/NOMRAL_SJS(vector_sum).png")
+    plt.savefig("E:/Results/SJS/Figures/NOMRAL_SJS(vector_sum).png")
     
     return

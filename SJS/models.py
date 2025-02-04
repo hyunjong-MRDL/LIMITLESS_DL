@@ -1,6 +1,4 @@
-import timm
 import torch.nn as nn
-from utils import seed_everything, CFG
 
 class GlandNet(nn.Module):
     def __init__(self):

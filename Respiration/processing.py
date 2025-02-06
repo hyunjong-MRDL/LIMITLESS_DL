@@ -28,22 +28,17 @@ def cut_by_beams(data_Times, data_Amps, beam_Times):
 def beam_modification(beam_Times):
     modified_beam_Times = []
     i = 0
-    if len(beam_Times) <= 2: return beam_Times
+    if len(beam_Times) <= 2: return beam_Times  # Only ONE beam-session
     else:
-        while i < (len(beam_Times)//2):
-            if (beam_Times[2*i+1] - beam_Times[2*i]) < 10:
-                if (i == 0) or (i == len(beam_Times)//2 - 1):
-                    modified_beam_Times.append(beam_Times[2*i])
-                    modified_beam_Times.append(beam_Times[2*i+1])
-                    i += 1
-                else:
-                    modified_beam_Times.append(beam_Times[2*i])
-                    modified_beam_Times.append(beam_Times[2*i+3])
-                    i += 2
-            else:
-                modified_beam_Times.append(beam_Times[2*i])
-                modified_beam_Times.append(beam_Times[2*i+1])
+        modified_beam_Times.append(beam_Times[0])  # Fill in 1st ON-time
+        while i < (len(beam_Times)//2-1):
+            if (beam_Times[2*i+2] - beam_Times[2*i+1]) < 10:  # When patient failed to hold breath (mistake)
                 i += 1
+            else:
+                modified_beam_Times.append(beam_Times[2*i+1])
+                modified_beam_Times.append(beam_Times[2*i+2])
+                i += 1
+        modified_beam_Times.append(beam_Times[-1])
         return modified_beam_Times
 
 """Sectionize beam-enabled intervals"""

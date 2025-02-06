@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from utils import createFolder, extract_data, extract_beam_moments
+from utils import createFolder
+from data import extract_data, extract_beam_moments
 
 def save_extracted_AP(filepath):
     file_to_read = open(filepath, "r")

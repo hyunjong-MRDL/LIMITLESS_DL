@@ -1,4 +1,4 @@
-import PIL, torch, random, os
+import PIL, torch, random, os, time
 import torchvision.transforms as transforms
 import numpy as np
 import matplotlib.pyplot as plt
@@ -20,7 +20,7 @@ CFG={'SEED' : 42,  # 42~46
      'IMG_SIZE' : 256,
      'TEST_PORTION' : 0.5,  # Test set 비율
      'CONTROL' : "NORMAL",  # "NORMAL" or "NON_SJS"
-     'save_path' : "E:/model_save_path/SJS/model_fusion/sample.pt",
+     'save_path' : "E:/model_save_path/SJS/model_fusion/vector_sum.pt",
      'EPOCHS' : 15,
      'BATCH_SIZE' : 4,
      'LR' : 1e-4}
@@ -36,6 +36,7 @@ def train(X_pg, X_sg, y, model, criterion, optimizer):
     total_preds = defaultdict(list)
     total_loss = []
     for epoch in range(CFG["EPOCHS"]):
+        epoch_start = time.time()
         for patient in total_patients:
             pg_data, sg_data = [], []
             labels = y[patient]
@@ -86,7 +87,8 @@ def train(X_pg, X_sg, y, model, criterion, optimizer):
                     optimizer.step()
                 total_loss.append(loss)
         
-        print(f"Epoch{epoch} finished.")
+        epoch_end = time.time()
+        print(f"Epoch{epoch} finished. ({(epoch_end-epoch_start)//60}min {(epoch_end-epoch_start)%60}sec passed)")
 
     torch.save(model.state_dict(), CFG["save_path"])
     return total_preds

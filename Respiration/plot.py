@@ -49,19 +49,19 @@ def metric_plot(result_folder, total_metrics, metric_type, savefig):
     result_folder = f"{result_folder}Metric_Plot/"
     utils.createFolder(result_folder)
     
-    filename = f"{result_folder}metric({metric_type}).jpg"
+    filename = f"{result_folder}{metric_type}.jpg"
 
     plt.figure(figsize=(18, 12))
     plt.plot(range(len(total_metrics)), total_metrics)
     plt.title(f"{metric_type}")
-    plt.xlabel("Field"), plt.ylabel("Amplitude (cm)")
+    plt.xlabel("Fraction"), plt.ylabel("Amplitude (cm)")
 
     if savefig == True:
         if os.path.exists(filename):
             print(f"Metric Plot [{metric_type}] already exists.")
         else:
             plt.savefig(filename)
-            print(f"Metirc Plot [{metric_type}] saved successfully.")
+            print(f"Metric Plot [{metric_type}] saved successfully.")
 
     plt.close()
 

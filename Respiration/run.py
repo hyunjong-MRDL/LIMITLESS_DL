@@ -21,21 +21,18 @@ while True:
     print()
 
     patient_path, num_fx = data.patient_path(data_root, treatment, breath)
-    patient_ID = patient_path.split("/")[5].split("_")[0]
+    patient_ID = utils.extract_patientID(patient_path)
     result_folder = f"{result_root}MTG_{num_attempts}/{patient_ID}/"
     utils.createFolder(result_folder)
 
     with open(f"{result_folder}metric.txt", "w") as f:
         patient_path, num_fx = data.patient_path(data_root, treatment, breath)
-        patient_ID = patient_path.split("/")[5].split("_")[0]
-        RPD_per_fld, STB_per_fld = [], [] # Metric over entire session (each metric is calculated for each field)
-        RPD_per_fx, STB_per_fx = [], [] # Metric over entire session (each metric is calculated for each fraction)
+        total_levels, total_errors = [], []
 
         for fx in range(1, num_fx+1):
             f.write(f"\t\t\t\t=====Fraction{fx}=====\n\n")
             fraction_path, num_fld = data.fraction_path(patient_path, fx)
-            rpds_per_fld, stbs_per_fld = [], [] # Reproducibility & Stability over each field -> [fld_rpd1, fld_rpd2, ...]
-            fx_lvls, fx_errors = [], [] # Avg_lvl & Vert_error for each fraction (over ALL fields) -> [avg_lvl1, avg_lvl2, ...]
+            fx_lvls, fx_errs = [], []
 
             for field in range(1, num_fld+1):
                 f.write(f"\t\t\t\t =====Field{field}=====\n")
@@ -43,41 +40,29 @@ while True:
                 beam_Times = processing.beam_modification(beam_Times)
                 cutted_Amps = processing.cut_by_beams(data_Times, data_Amps, beam_Times)
                 enabled_intervals, num_intvs = processing.beam_enabling_intervals(data_Times, data_Amps, beam_Times)
-                field_lvls, field_lines, field_errors = [], [], []
 
                 for intv in range(num_intvs):
                     avg_lvl = metric.avg_lvl_per_interval(enabled_intervals[intv])
                     fitted_line = processing.regression_line(enabled_intervals[intv])
                     error = metric.error_per_interval(enabled_intervals[intv])
-                    field_lvls.append(avg_lvl)
-                    field_lines.append(fitted_line)
-                    field_errors.append(error)
                     fx_lvls.append(avg_lvl)
-                    fx_errors.append(error)
-                    f.write(f"[Interval{intv}] Average Level (mm): {10*avg_lvl:.4f}\tVertical Error (mm): {10*error:.4f}\n")  # cm -> mm
+                    fx_errs.append(error)
+                    f.write(f"[Interval{intv}] Average Level (mm): {10*avg_lvl:.4f}\tVertical Distance (mm): {10*error:.4f}\n")  # cm -> mm
+                
+                f.write("\n")
 
-                fld_reprod = metric.reprod_per_field(field_lvls)
-                fld_stab = metric.stab_per_field(field_errors)
-                dilated_avgs, dilated_lines = processing.dilate_metrics(data_Times, beam_Times, field_lvls, field_lines)
-                if plot_mode: plot.integrated_plot(result_folder, fx, field, data_Times, cutted_Amps, dilated_avgs, dilated_lines, savefig=True)
-                rpds_per_fld.append(fld_reprod)
-                stbs_per_fld.append(fld_stab)
-                f.write(f"Reproducibility (mm): {10*fld_reprod:.4f}\tStability (mm): {10*fld_stab:.4f}\n\n")                 # cm -> mm
+            fx_level = np.mean(np.array(fx_lvls))
+            fx_error = np.mean(np.array(fx_errs))
+            total_levels.append(fx_level)
+            total_errors.append(fx_error)
+            f.write(f"Fraction Level (mm): {10*fx_level:.4f}\tMean Distance (mm): {10*fx_error:.4f}\n\n")     # cm -> mm
 
-            fx_mean_reprod = metric.mean_reprod_per_fraction(rpds_per_fld)
-            fx_mean_stab = metric.mean_stab_per_fraction(stbs_per_fld)
-            fx_rpd = metric.reprod_per_field(fx_lvls)
-            fx_stb = metric.stab_per_field(fx_errors)
-            RPD_per_fld.append(fx_mean_reprod)
-            STB_per_fld.append(fx_mean_stab)
-            RPD_per_fx.append(fx_rpd)
-            STB_per_fx.append(fx_stb)
-            f.write(f"Mean Reproducibility (mm): {10*fx_mean_reprod:.4f}\tMean Stability (mm): {10*fx_mean_stab:.4f}\n")     # cm -> mm
-            f.write(f"Fraction Reproducibility (mm): {10*fx_rpd:.4f}\tFraction Stability (mm): {10*fx_stb:.4f}\n\n\n")       # cm -> mm
-
-        CV_RPD, CV_STB = metric.coeff_var(RPD_per_fx), metric.coeff_var(STB_per_fx)
+        f.write("\t\t\t\t=====Total Analysis=====\n")
+        f.write(f"Reproducibility (mm): {10*metric.reproducibility(total_levels):.4f}\tStability (mm): {10*metric.stability(total_errors):.4f}\n")
         f.write("\t\t\t\t=====CV=====\n")
-        f.write(f"Reproducibility: {CV_RPD:.4f}\tStability (mm): {CV_STB:.4f}\n\n")
+        f.write(f"Average Level (mm): {10*metric.coeff_var(total_levels):.4f}\tVertical Distance (mm): {10*metric.coeff_var(total_errors):.4f}\n\n")
+        plot.metric_plot(result_folder, total_levels, "Avg_lvl", savefig=True)
+        plot.metric_plot(result_folder, total_errors, "Vert_dist", savefig=True)
     
     print(f"Analysis on [{patient_ID}] is complete.")
     print()

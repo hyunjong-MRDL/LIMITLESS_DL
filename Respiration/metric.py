@@ -5,12 +5,12 @@ import numpy as np
 def avg_lvl_per_interval(Amps):
     return np.sum(Amps) / len(Amps)
 
-# Field reproducibility
-def reprod_per_field(avg_levels):
+# Reproducibility (with a list of average levels)
+def reproducibility(avg_levels):
     return max(avg_levels) - min(avg_levels)
 
-# Average reproducibility per fraction
-def mean_reprod_per_fraction(reprods):
+# Average reproducibility
+def mean_reproducibility(reprods):
     return np.mean(np.array(reprods))
 
 """Stability"""
@@ -22,12 +22,12 @@ def error_per_interval(Amps):
     duration = dt * ( len(Amps) - 1 )
     return abs(slope) * duration
 
-# Field stability
-def stab_per_field(errors):
+# Stability (with a list of vertical distances)
+def stability(errors):
     return max(errors)
 
-# Average stability per fraction
-def mean_stab_per_fraction(stabs):
+# Average stability
+def mean_stability(stabs):
     return np.mean(np.array(stabs))
 
 """Statistics"""

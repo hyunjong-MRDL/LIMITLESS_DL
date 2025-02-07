@@ -16,11 +16,26 @@ def seed_everything(seed):
 
 device = "cuda" if torch.cuda.is_available() else 'cpu'
 
-CFG={'SEED' : 42,  # 42~46
-     'IMG_SIZE' : 256,
+# CFG={'SEED' : 42,  # 42~46
+#      'IMG_SIZE' : 256,
+#      'TEST_PORTION' : 0.5,  # Test set 비율
+#      'CONTROL' : "NORMAL",  # "NORMAL" or "NON_SJS"
+#      'save_path' : "E:/model_save_path/SJS/model_fusion/attn_module.pt",
+#      'EPOCHS' : 15,
+#      'BATCH_SIZE' : 4,
+#      'LR' : 1e-4}
+
+control_group = "NON_SJS"  # NORMAL or NON_SJS
+
+CFG={'SEED' : 46,  # 42~46
+     'IMG_SIZE' : 224,
      'TEST_PORTION' : 0.5,  # Test set 비율
-     'CONTROL' : "NORMAL",  # "NORMAL" or "NON_SJS"
-     'save_path' : "E:/model_save_path/SJS/model_fusion/vector_sum.pt",
+     'pg_res_path' : f"E:/model_save_path/SJS/{control_group}_save_path/{control_group}_5x_test50(PG_Res)_seed46.pt",
+     'pg_vgg_path' : f"E:/model_save_path/SJS/{control_group}_save_path/{control_group}_5x_test50(PG_VGG)_seed46.pt",
+     'pg_inc_path' : f"E:/model_save_path/SJS/{control_group}_save_path/{control_group}_5x_test50(PG_Inception)_seed46.pt",
+     'sg_res_path' : f"E:/model_save_path/SJS/{control_group}_save_path/{control_group}_5x_test50(SG_Res)_seed46.pt",
+     'sg_vgg_path' : f"E:/model_save_path/SJS/{control_group}_save_path/{control_group}_5x_test50(SG_VGG)_seed46.pt",
+     'sg_inc_path' : f"E:/model_save_path/SJS/{control_group}_save_path/{control_group}_5x_test50(SG_Inception)_seed46.pt",
      'EPOCHS' : 15,
      'BATCH_SIZE' : 4,
      'LR' : 1e-4}
@@ -144,6 +159,56 @@ def test(X_pg, X_sg, y, model):
 
     return preds, gts
 
+def test_2(X_pg, X_sg, Y_pg, Y_sg, PG_Res, PG_VGG, PG_Inc, SG_Res, SG_VGG, SG_Inc):
+    PG_Res.load_state_dict(torch.load(CFG["pg_res_path"], map_location="cuda"))
+    PG_VGG.load_state_dict(torch.load(CFG["pg_vgg_path"], map_location="cuda"))
+    PG_Inc.load_state_dict(torch.load(CFG["pg_inc_path"], map_location="cuda"))
+    SG_Res.load_state_dict(torch.load(CFG["sg_res_path"], map_location="cuda"))
+    SG_VGG.load_state_dict(torch.load(CFG["sg_vgg_path"], map_location="cuda"))
+    SG_Inc.load_state_dict(torch.load(CFG["sg_inc_path"], map_location="cuda"))
+    PG_Res.eval()
+    PG_VGG.eval()
+    PG_Inc.eval()
+    SG_Res.eval()
+    SG_VGG.eval()
+    SG_Inc.eval()
+    pg_patients = list(Y_pg.keys())
+    sg_patients = list(Y_sg.keys())
+    preds, gts = defaultdict(list), defaultdict(list)
+    for patient in pg_patients:
+        datas = X_pg[patient]
+        labels = Y_pg[patient]
+        
+        for i in range(len(datas)):
+            curr_data = preprocessing(PIL.Image.open(datas[i])).float().unsqueeze(0).to(device)
+            curr_label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
+
+            with torch.no_grad():
+                res_out = PG_Res(curr_data)
+                vgg_out = PG_VGG(curr_data)
+                inc_out = PG_Inc(curr_data)
+                output = (res_out + vgg_out + inc_out) / 3
+                preds[patient].append(output.detach().cpu().tolist())
+                gts[patient].append(curr_label.detach().cpu().tolist())
+    
+    for patient in sg_patients:
+        datas = X_sg[patient]
+        labels = Y_sg[patient]
+
+        for i in range(len(datas)):
+            curr_data = preprocessing(PIL.Image.open(datas[i])).float().unsqueeze(0).to(device)
+            label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
+
+            with torch.no_grad():
+                res_out = SG_Res(curr_data)
+                vgg_out = SG_VGG(curr_data)
+                inc_out = SG_Inc(curr_data)
+                output = (res_out + vgg_out + inc_out) / 3
+                preds[patient].append(output.detach().cpu().tolist())
+                gts[patient].append(label.detach().cpu().tolist())
+
+    return preds, gts
+
 ## Simple arithmetic mean
 def pred_gt_by_patients(preds, gts):
     total_IDs = list(preds.keys())
@@ -151,12 +216,8 @@ def pred_gt_by_patients(preds, gts):
     for ID in total_IDs:
         ID_preds = preds[ID]
         ID_gts = gts[ID]
-        ID_sum = 0
-        for i in range(len(ID_preds)):
-            curr_out = np.array(ID_preds[i]).item()
-            ID_sum += curr_out
-        patient_preds[ID] = (ID_sum / len(ID_preds))
-        patient_gts[ID] = np.array(ID_gts[0]).item()
+        patient_preds[ID] = np.max(ID_preds)
+        patient_gts[ID] = np.mean(ID_gts)
     
     return patient_preds, patient_gts
 
@@ -188,6 +249,6 @@ def ROC(preds, gts, SJS_size, CTR_size):
     plt.scatter(fpr[idx], tpr[idx], marker='o', s=200, color='r',
                 label = 'Sensitivity : %.3f (%d / %d), \nSpecificity = %.3f (%d / %d), \nAUC = %.3f , \nACC = %.3f (%d / %d)' % (sens, (sens*SJS_size), SJS_size, spec, (spec*CTR_size), CTR_size, auc, acc, sens*SJS_size+spec*CTR_size, SJS_size+CTR_size))
     plt.legend()
-    plt.savefig("E:/Results/SJS/Figures/NOMRAL_SJS(vector_sum).png")
+    plt.savefig(f"E:/Results/SJS/Figures/{control_group}_SJS(max_vote).png")
     
     return

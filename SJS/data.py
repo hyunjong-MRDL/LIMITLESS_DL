@@ -63,19 +63,25 @@ def train_test_split(pt_paths, ratio):
     return train_pt_paths, test_pt_paths
 
 def gland_dataset(SJS_by_patient, CTR_by_patient):
-    X_pg, X_sg, y = defaultdict(list), defaultdict(list), defaultdict(list)
+    X_pg, X_sg, Y_pg, Y_sg = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
     for sjs_ID in SJS_by_patient:
         ID_data = SJS_by_patient[sjs_ID]
         for path in ID_data:
-            if "PTG" in path: X_pg[sjs_ID].append(path)
-            else: X_sg[sjs_ID].append(path)
-            y[sjs_ID].append(np.array([1]))
+            if "PTG" in path:
+                X_pg[sjs_ID].append(path)
+                Y_pg[sjs_ID].append(np.array([1]))
+            else:
+                X_sg[sjs_ID].append(path)
+                Y_sg[sjs_ID].append(np.array([1]))
     
     for ctr_ID in CTR_by_patient:
         ID_data = CTR_by_patient[ctr_ID]
         for path in ID_data:
-            if "PTG" in path: X_pg[ctr_ID].append(path)
-            else: X_sg[ctr_ID].append(path)
-            y[ctr_ID].append(np.array([0]))
+            if "PTG" in path:
+                X_pg[ctr_ID].append(path)
+                Y_pg[ctr_ID].append(np.array([0]))
+            else:
+                X_sg[ctr_ID].append(path)
+                Y_sg[ctr_ID].append(np.array([0]))
 
-    return X_pg, X_sg, y
+    return X_pg, X_sg, Y_pg, Y_sg

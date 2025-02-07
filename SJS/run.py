@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 import data, models, utils
-from utils import seed_everything, CFG
+from utils import seed_everything, CFG, control_group
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -16,7 +16,7 @@ processed_root = f"{root}Processed/"
 mode = input("Select run MODE (train/test) : ")
 
 total_SJS = data.split_by_patient(data.load_by_diagnosis(processed_root, "SJS"))
-total_CTR = data.split_by_patient(data.load_by_diagnosis(processed_root, CFG["CONTROL"]))
+total_CTR = data.split_by_patient(data.load_by_diagnosis(processed_root, control_group))
 
 train_SJS, test_SJS = data.train_test_split(total_SJS, CFG["TEST_PORTION"])
 train_CTR, test_CTR = data.train_test_split(total_CTR, CFG["TEST_PORTION"])

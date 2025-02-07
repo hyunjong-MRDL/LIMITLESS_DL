@@ -40,22 +40,31 @@ while True:
                 beam_Times = processing.beam_modification(beam_Times)
                 cutted_Amps = processing.cut_by_beams(data_Times, data_Amps, beam_Times)
                 enabled_intervals, num_intvs = processing.beam_enabling_intervals(data_Times, data_Amps, beam_Times)
+                fld_lvls, fld_lines = [], []
 
                 for intv in range(num_intvs):
                     avg_lvl = metric.avg_lvl_per_interval(enabled_intervals[intv])
                     fitted_line = processing.regression_line(enabled_intervals[intv])
                     error = metric.error_per_interval(enabled_intervals[intv])
+                    fld_lvls.append(avg_lvl)
+                    fld_lines.append(fitted_line)
                     fx_lvls.append(avg_lvl)
                     fx_errs.append(error)
                     f.write(f"[Interval{intv}] Average Level (mm): {10*avg_lvl:.4f}\tVertical Distance (mm): {10*error:.4f}\n")  # cm -> mm
                 
+                dilated_avgs, dilated_lines = processing.dilate_metrics(data_Times, beam_Times, fld_lvls, fld_lines)
+                plot.plot_AP(result_folder, fx, field, "Raw", data_Times, data_Amps, savefig=True)
+                plot.integrated_plot(result_folder, fx, field, data_Times, cutted_Amps, dilated_avgs, dilated_lines, savefig=True)
                 f.write("\n")
 
             fx_level = np.mean(np.array(fx_lvls))
             fx_error = np.mean(np.array(fx_errs))
             total_levels.append(fx_level)
             total_errors.append(fx_error)
-            f.write(f"Fraction Level (mm): {10*fx_level:.4f}\tMean Distance (mm): {10*fx_error:.4f}\n\n")     # cm -> mm
+            f.write(f"\t\t\t\t ==Mean==\n")
+            f.write(f"Average Level (mm): {10*fx_level:.4f}\tVertical Distance (mm): {10*fx_error:.4f}\n")     # cm -> mm
+            f.write(f"\t\t\t\t ==STD==\n")
+            f.write(f"Average Level (mm): {10*np.std(np.array(fx_lvls)):.4f} \tVertical Distance (mm): {10*np.std(np.array(fx_errs)):.4f}\n\n")
 
         f.write("\t\t\t\t=====Total Analysis=====\n")
         f.write(f"Reproducibility (mm): {10*metric.reproducibility(total_levels):.4f}\tStability (mm): {10*metric.stability(total_errors):.4f}\n")

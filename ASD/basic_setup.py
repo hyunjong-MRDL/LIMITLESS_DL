@@ -22,10 +22,10 @@ hyperparameters = {"SEED": 42,
 image_dimension = hyperparameters["TYPE"]
 if image_dimension == 3:
     model_name = "Res3d"
-    model_save_path = f"C:/Users/PC00/Desktop/ASD_Project/save_path/{model_name}(CE_Loss).pt"
+    model_save_path = f"E:/LIMITLESS_DL/ASD/save_path/{model_name}(CE_Loss).pt"
 elif image_dimension == 2:
     model_name = "Res2d"
-    model_save_path = f"C:/Users/PC00/Desktop/ASD_Project/save_path/{model_name}_epo10(CE_Loss).pt"
+    model_save_path = f"E:/LIMITLESS_DL/ASD/save_path/{model_name}_epo10(CE_Loss).pt"
 
 def seed_everything(seed):
     random.seed(seed)

@@ -1,7 +1,7 @@
 import data, utils, processing, metric
 import numpy as np
 
-root = 'E:/Deep_Learning/Respiration/'
+root = 'E:/LIMITLESS_DL/Respiration/'
 data_root = f"{root}DATA/"
 result_root = f"{root}RESULTS/"
 

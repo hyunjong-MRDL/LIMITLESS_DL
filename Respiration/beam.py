@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import pingouin as pg
 
-root = 'E:/Deep_Learning/Respiration/'
+root = 'E:/LIMITLESS_DL/Respiration/'
 data_root = f"{root}DATA/"
 result_root = f"{root}RESULTS/"
 

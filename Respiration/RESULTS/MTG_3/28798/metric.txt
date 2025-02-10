@@ -33,9 +33,9 @@
 [Interval0] Average Level (mm): 12.6962	Vertical Distance (mm): 1.0714
 
 				 ==Mean==
-Average Level (mm): 12.5746	Vertical Distance (mm): 1.1216
+Average Level (mm): 12.5746	Vertical Distance (mm): 1.1216	STD (mm): 0.4535
 				 ==STD==
-Average Level (mm): 0.4127 	Vertical Distance (mm): 0.3633
+Average Level (mm): 0.4127 	Vertical Distance (mm): 0.3633	STD (mm): 0.0138
 
 				=====Fraction2=====
 
@@ -71,9 +71,9 @@ Average Level (mm): 0.4127 	Vertical Distance (mm): 0.3633
 [Interval0] Average Level (mm): 12.4773	Vertical Distance (mm): 2.1772
 
 				 ==Mean==
-Average Level (mm): 12.3414	Vertical Distance (mm): 1.2704
+Average Level (mm): 12.3414	Vertical Distance (mm): 1.2704	STD (mm): 0.4444
 				 ==STD==
-Average Level (mm): 0.2658 	Vertical Distance (mm): 0.4797
+Average Level (mm): 0.2658 	Vertical Distance (mm): 0.4797	STD (mm): 0.0118
 
 				=====Fraction3=====
 
@@ -110,9 +110,9 @@ Average Level (mm): 0.2658 	Vertical Distance (mm): 0.4797
 [Interval0] Average Level (mm): 13.0187	Vertical Distance (mm): 0.5444
 
 				 ==Mean==
-Average Level (mm): 12.4472	Vertical Distance (mm): 1.3642
+Average Level (mm): 12.4472	Vertical Distance (mm): 1.3642	STD (mm): 0.4940
 				 ==STD==
-Average Level (mm): 0.4349 	Vertical Distance (mm): 0.4208
+Average Level (mm): 0.4349 	Vertical Distance (mm): 0.4208	STD (mm): 0.0143
 
 				=====Fraction4=====
 
@@ -149,9 +149,9 @@ Average Level (mm): 0.4349 	Vertical Distance (mm): 0.4208
 [Interval0] Average Level (mm): 12.9672	Vertical Distance (mm): 1.3231
 
 				 ==Mean==
-Average Level (mm): 12.1811	Vertical Distance (mm): 1.4594
+Average Level (mm): 12.1811	Vertical Distance (mm): 1.4594	STD (mm): 0.5088
 				 ==STD==
-Average Level (mm): 0.5527 	Vertical Distance (mm): 0.5972
+Average Level (mm): 0.5527 	Vertical Distance (mm): 0.5972	STD (mm): 0.0139
 
 				=====Fraction5=====
 
@@ -188,9 +188,9 @@ Average Level (mm): 0.5527 	Vertical Distance (mm): 0.5972
 [Interval0] Average Level (mm): 11.9595	Vertical Distance (mm): 1.0234
 
 				 ==Mean==
-Average Level (mm): 12.1949	Vertical Distance (mm): 1.1855
+Average Level (mm): 12.1949	Vertical Distance (mm): 1.1855	STD (mm): 0.4327
 				 ==STD==
-Average Level (mm): 0.2704 	Vertical Distance (mm): 0.5522
+Average Level (mm): 0.2704 	Vertical Distance (mm): 0.5522	STD (mm): 0.0130
 
 				=====Fraction6=====
 
@@ -227,9 +227,9 @@ Average Level (mm): 0.2704 	Vertical Distance (mm): 0.5522
 [Interval0] Average Level (mm): 11.9805	Vertical Distance (mm): 0.7001
 
 				 ==Mean==
-Average Level (mm): 12.6206	Vertical Distance (mm): 1.0656
+Average Level (mm): 12.6206	Vertical Distance (mm): 1.0656	STD (mm): 0.3671
 				 ==STD==
-Average Level (mm): 0.4757 	Vertical Distance (mm): 0.5154
+Average Level (mm): 0.4757 	Vertical Distance (mm): 0.5154	STD (mm): 0.0150
 
 				=====Fraction7=====
 
@@ -265,9 +265,9 @@ Average Level (mm): 0.4757 	Vertical Distance (mm): 0.5154
 [Interval0] Average Level (mm): 12.6189	Vertical Distance (mm): 1.0245
 
 				 ==Mean==
-Average Level (mm): 12.6723	Vertical Distance (mm): 1.0442
+Average Level (mm): 12.6723	Vertical Distance (mm): 1.0442	STD (mm): 0.4167
 				 ==STD==
-Average Level (mm): 0.4475 	Vertical Distance (mm): 0.3580
+Average Level (mm): 0.4475 	Vertical Distance (mm): 0.3580	STD (mm): 0.0098
 
 				=====Fraction8=====
 
@@ -304,9 +304,9 @@ Average Level (mm): 0.4475 	Vertical Distance (mm): 0.3580
 [Interval0] Average Level (mm): 14.0570	Vertical Distance (mm): 0.1884
 
 				 ==Mean==
-Average Level (mm): 12.2581	Vertical Distance (mm): 0.9685
+Average Level (mm): 12.2581	Vertical Distance (mm): 0.9685	STD (mm): 0.3661
 				 ==STD==
-Average Level (mm): 0.7251 	Vertical Distance (mm): 0.4873
+Average Level (mm): 0.7251 	Vertical Distance (mm): 0.4873	STD (mm): 0.0108
 
 				=====Fraction9=====
 
@@ -343,9 +343,9 @@ Average Level (mm): 0.7251 	Vertical Distance (mm): 0.4873
 [Interval0] Average Level (mm): 11.7968	Vertical Distance (mm): 2.0957
 
 				 ==Mean==
-Average Level (mm): 12.6961	Vertical Distance (mm): 0.9846
+Average Level (mm): 12.6961	Vertical Distance (mm): 0.9846	STD (mm): 0.3748
 				 ==STD==
-Average Level (mm): 0.5915 	Vertical Distance (mm): 0.4649
+Average Level (mm): 0.5915 	Vertical Distance (mm): 0.4649	STD (mm): 0.0128
 
 				=====Fraction10=====
 
@@ -381,12 +381,12 @@ Average Level (mm): 0.5915 	Vertical Distance (mm): 0.4649
 [Interval0] Average Level (mm): 12.7221	Vertical Distance (mm): 1.3220
 
 				 ==Mean==
-Average Level (mm): 12.3027	Vertical Distance (mm): 0.8504
+Average Level (mm): 12.3027	Vertical Distance (mm): 0.8504	STD (mm): 0.3621
 				 ==STD==
-Average Level (mm): 0.5468 	Vertical Distance (mm): 0.4007
+Average Level (mm): 0.5468 	Vertical Distance (mm): 0.4007	STD (mm): 0.0138
 
 				=====Total Analysis=====
-Reproducibility (mm): 0.5149	Stability (mm): 1.4594
+Reproducibility (mm): 0.5149	Stability (mm): 1.4594	STD (mm): 0.4220
 				=====CV=====
 Average Level (mm): 0.1522	Vertical Distance (mm): 1.5886
 

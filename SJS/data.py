@@ -1,7 +1,6 @@
 import os, random
 import numpy as np
 from collections import defaultdict
-from utils import seed_everything, CFG
 
 """Abbreviations"""
 # pt.: patient

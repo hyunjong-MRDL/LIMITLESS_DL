@@ -3,7 +3,7 @@ import torchvision.transforms as transforms
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import defaultdict
-from sklearn.metrics import roc_auc_score, roc_curve
+# from sklearn.metrics import roc_auc_score, roc_curve
 
 def seed_everything(seed):
     random.seed(seed)
@@ -45,7 +45,79 @@ preprocessing = transforms.Compose([
     transforms.ToTensor()
 ])
 
-def train(X_pg, X_sg, y, model, criterion, optimizer):
+def createFolder(directory):
+    try:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+    except OSError:
+        print(f"Error: Creating directory {directory}")
+    return
+
+def train(X_pg, X_sg, Y_pg, Y_sg, PG_Res, PG_VGG, PG_Inc, SG_Res, SG_VGG, SG_Inc, criterion, optimizer):
+    PG_Res.train()
+    PG_VGG.train()
+    PG_Inc.train()
+    SG_Res.train()
+    SG_VGG.train()
+    SG_Inc.train()
+    pg_patients = list(Y_pg.keys())
+    sg_patients = list(Y_sg.keys())
+    total_preds = defaultdict(list)
+    total_loss = []
+    for epoch in range(CFG["EPOCHS"]):
+        epoch_start = time.time()
+        for patient in pg_patients:
+            datas = X_pg[patient]
+            labels = Y_pg[patient]
+
+            for i in range(len(datas)):
+                curr_data = preprocessing(PIL.Image.open(datas[i])).float().unsqueeze(0).to(device)
+                curr_label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
+
+                res_out = PG_Res(curr_data)[0][0]
+                vgg_out = PG_VGG(curr_data)[0][0]
+                inc_out = PG_Inc(curr_data)[0][0]
+                output = np.max(np.array([res_out, vgg_out, inc_out]))
+                total_preds[patient].append(output.detach().cpu().tolist())
+
+                loss = criterion(output, curr_label)
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+                total_loss.append(loss)
+        
+        for patient in sg_patients:
+            datas = X_sg[patient]
+            labels = Y_sg[patient]
+
+            for i in range(len(datas)):
+                curr_data = preprocessing(PIL.Image.open(datas[i])).float().unsqueeze(0).to(device)
+                curr_label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
+
+                res_out = SG_Res(curr_data)[0][0]
+                vgg_out = SG_VGG(curr_data)[0][0]
+                inc_out = SG_Inc(curr_data)[0][0]
+                output = np.max(np.array([res_out, vgg_out, inc_out]))
+                total_preds[patient].append(output.detach().cpu().tolist())
+
+                loss = criterion(output, curr_label)
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+                total_loss.append(loss)
+        
+        epoch_end = time.time()
+        print(f"Epoch{epoch} finished. ({(epoch_end-epoch_start)//60}min {(epoch_end-epoch_start)%60}sec passed)")
+
+    torch.save(PG_Res.state_dict(), CFG["pg_res_path"])
+    torch.save(PG_VGG.state_dict(), CFG["pg_vgg_path"])
+    torch.save(PG_Inc.state_dict(), CFG["pg_inc_path"])
+    torch.save(SG_Res.state_dict(), CFG["sg_res_path"])
+    torch.save(SG_VGG.state_dict(), CFG["sg_vgg_path"])
+    torch.save(SG_Inc.state_dict(), CFG["sg_inc_path"])
+    return total_preds
+
+def train_fused(X_pg, X_sg, y, model, criterion, optimizer):
     model.train()
     total_patients = list(y.keys())
     total_preds = defaultdict(list)
@@ -108,58 +180,7 @@ def train(X_pg, X_sg, y, model, criterion, optimizer):
     torch.save(model.state_dict(), CFG["save_path"])
     return total_preds
 
-def test(X_pg, X_sg, y, model):
-    model.load_state_dict(torch.load(CFG["save_path"], map_location="cuda"))
-    model.eval()
-    total_patients = list(y.keys())
-    preds, gts = defaultdict(list), defaultdict(list)
-    for patient in total_patients:
-        pg_data, sg_data = [], []
-        labels = y[patient]
-        if patient in X_pg.keys():
-            pg_data = X_pg[patient]
-        if patient in X_sg.keys():
-            sg_data = X_sg[patient]
-        
-        if len(pg_data) > len(sg_data):
-            for i in range(len(pg_data)):
-                if i < len(sg_data):
-                    curr_pg = preprocessing(PIL.Image.open(pg_data[i]))
-                    curr_sg = preprocessing(PIL.Image.open(sg_data[i]))
-                else:
-                    curr_pg = preprocessing(PIL.Image.open(pg_data[i]))
-                    curr_sg = torch.zeros((3, CFG["IMG_SIZE"], CFG["IMG_SIZE"]))
-                
-                curr_pg = curr_pg.float().unsqueeze(0).to(device)
-                curr_sg = curr_sg.float().unsqueeze(0).to(device)
-                label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
-
-                with torch.no_grad():
-                    output = model(curr_pg, curr_sg)
-                    preds[patient].append(output.detach().cpu().tolist())
-                    gts[patient].append(label.detach().cpu().tolist())
-
-        elif len(sg_data) > len(pg_data):
-            for i in range(len(sg_data)):
-                if i < len(pg_data):
-                    curr_sg = preprocessing(PIL.Image.open(sg_data[i]))
-                    curr_pg = preprocessing(PIL.Image.open(pg_data[i]))
-                else:
-                    curr_sg = preprocessing(PIL.Image.open(sg_data[i]))
-                    curr_pg = torch.zeros((3, CFG["IMG_SIZE"], CFG["IMG_SIZE"]))
-
-                curr_pg = curr_pg.float().unsqueeze(0).to(device)
-                curr_sg = curr_sg.float().unsqueeze(0).to(device)
-                label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
-
-                with torch.no_grad():
-                    output = model(curr_pg, curr_sg)
-                    preds[patient].append(output.detach().cpu().tolist())
-                    gts[patient].append(label.detach().cpu().tolist())
-
-    return preds, gts
-
-def test_2(X_pg, X_sg, Y_pg, Y_sg, PG_Res, PG_VGG, PG_Inc, SG_Res, SG_VGG, SG_Inc):
+def test(X_pg, X_sg, Y_pg, Y_sg, PG_Res, PG_VGG, PG_Inc, SG_Res, SG_VGG, SG_Inc):
     PG_Res.load_state_dict(torch.load(CFG["pg_res_path"], map_location="cuda"))
     PG_VGG.load_state_dict(torch.load(CFG["pg_vgg_path"], map_location="cuda"))
     PG_Inc.load_state_dict(torch.load(CFG["pg_inc_path"], map_location="cuda"))
@@ -175,6 +196,7 @@ def test_2(X_pg, X_sg, Y_pg, Y_sg, PG_Res, PG_VGG, PG_Inc, SG_Res, SG_VGG, SG_In
     pg_patients = list(Y_pg.keys())
     sg_patients = list(Y_sg.keys())
     preds, gts = defaultdict(list), defaultdict(list)
+    max_models = dict()
     for patient in pg_patients:
         datas = X_pg[patient]
         labels = Y_pg[patient]
@@ -184,12 +206,15 @@ def test_2(X_pg, X_sg, Y_pg, Y_sg, PG_Res, PG_VGG, PG_Inc, SG_Res, SG_VGG, SG_In
             curr_label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
 
             with torch.no_grad():
-                res_out = PG_Res(curr_data)
-                vgg_out = PG_VGG(curr_data)
-                inc_out = PG_Inc(curr_data)
-                output = (res_out + vgg_out + inc_out) / 3
-                preds[patient].append(output.detach().cpu().tolist())
-                gts[patient].append(curr_label.detach().cpu().tolist())
+                res_out = PG_Res(curr_data)[0][0]
+                vgg_out = PG_VGG(curr_data)[0][0]
+                inc_out = PG_Inc(curr_data)[0][0]
+                out_array = np.array([res_out.detach().cpu().tolist(), vgg_out.detach().cpu().tolist(), inc_out.detach().cpu().tolist()])
+                output = np.max(out_array)
+                model_index = np.argmax(out_array)
+                preds[patient].append(output)
+                gts[patient].append(curr_label[0].detach().cpu().tolist())
+                max_models[patient] = model_index
     
     for patient in sg_patients:
         datas = X_sg[patient]
@@ -197,29 +222,34 @@ def test_2(X_pg, X_sg, Y_pg, Y_sg, PG_Res, PG_VGG, PG_Inc, SG_Res, SG_VGG, SG_In
 
         for i in range(len(datas)):
             curr_data = preprocessing(PIL.Image.open(datas[i])).float().unsqueeze(0).to(device)
-            label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
+            curr_label = torch.from_numpy(labels[i].astype(np.float32)).unsqueeze(0).to(device)
 
             with torch.no_grad():
-                res_out = SG_Res(curr_data)
-                vgg_out = SG_VGG(curr_data)
-                inc_out = SG_Inc(curr_data)
-                output = (res_out + vgg_out + inc_out) / 3
-                preds[patient].append(output.detach().cpu().tolist())
-                gts[patient].append(label.detach().cpu().tolist())
+                res_out = SG_Res(curr_data)[0][0]
+                vgg_out = SG_VGG(curr_data)[0][0]
+                inc_out = SG_Inc(curr_data)[0][0]
+                out_array = np.array([res_out.detach().cpu().tolist(), vgg_out.detach().cpu().tolist(), inc_out.detach().cpu().tolist()])
+                output = np.max(out_array)
+                model_index = np.argmax(out_array)
+                preds[patient].append(output)
+                gts[patient].append(curr_label[0].detach().cpu().tolist())
+                max_models[patient] = model_index  # 0: ResNet, 1: VGG, 2: Inception_v3
 
-    return preds, gts
+    return preds, gts, max_models
 
 ## Simple arithmetic mean
 def pred_gt_by_patients(preds, gts):
     total_IDs = list(preds.keys())
     patient_preds, patient_gts = dict(), dict()
+    patient_image = dict()
     for ID in total_IDs:
         ID_preds = preds[ID]
-        ID_gts = gts[ID]
+        ID_gt = gts[ID]
         patient_preds[ID] = np.max(ID_preds)
-        patient_gts[ID] = np.mean(ID_gts)
+        patient_image[ID] = np.argmax(ID_preds)
+        patient_gts[ID] = ID_gt
     
-    return patient_preds, patient_gts
+    return patient_preds, patient_gts, patient_image
 
 def preds_and_gts(preds, gts):
     total_IDs = list(preds.keys())

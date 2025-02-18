@@ -15,10 +15,10 @@ class ResNet(nn.Module):
         return x
 
 class VGG16(nn.Module):
-    def __init__(self, classes=2):
+    def __init__(self):
         super().__init__()
         self.model = timm.create_model("vgg16_bn", pretrained=True)
-        self.model.head.fc = nn.Linear(in_features=4096, out_features=classes, bias=True)
+        self.model.head.fc = nn.Linear(in_features=4096, out_features=2, bias=True)
         self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, x):
@@ -28,10 +28,10 @@ class VGG16(nn.Module):
         return x
 
 class Inception(nn.Module):
-    def __init__(self, classes=2):
+    def __init__(self):
         super().__init__()
         self.model = timm.create_model("inception_v3", pretrained=True)
-        self.model.fc = nn.Linear(in_features=2048, out_features=classes, bias=True)
+        self.model.fc = nn.Linear(in_features=2048, out_features=2, bias=True)
         self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, x):

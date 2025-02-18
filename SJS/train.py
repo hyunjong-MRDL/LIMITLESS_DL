@@ -10,7 +10,7 @@ seed_everything(CFG["SEED"])
 
 device = "cuda" if torch.cuda.is_available() else 'cpu'
 
-root = root = "D:/Datasets/SJS/"
+root = "D:/Datasets/SJS/"
 processed_root = f"{root}Processed/"
 
 mode = input("Select run MODE (train/test) : ")

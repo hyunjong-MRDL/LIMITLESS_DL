@@ -1,5 +1,6 @@
 import os, random
 import numpy as np
+import pandas as pd
 from collections import defaultdict
 
 """Abbreviations"""
@@ -68,19 +69,55 @@ def gland_dataset(SJS_by_patient, CTR_by_patient):
         for path in ID_data:
             if "PTG" in path:
                 X_pg[sjs_ID].append(path)
-                Y_pg[sjs_ID].append(np.array([1]))
+                Y_pg[sjs_ID].append(np.array(1))
             else:
                 X_sg[sjs_ID].append(path)
-                Y_sg[sjs_ID].append(np.array([1]))
+                Y_sg[sjs_ID].append(np.array(1))
     
     for ctr_ID in CTR_by_patient:
         ID_data = CTR_by_patient[ctr_ID]
         for path in ID_data:
             if "PTG" in path:
                 X_pg[ctr_ID].append(path)
-                Y_pg[ctr_ID].append(np.array([0]))
+                Y_pg[ctr_ID].append(np.array(0))
             else:
                 X_sg[ctr_ID].append(path)
-                Y_sg[ctr_ID].append(np.array([0]))
+                Y_sg[ctr_ID].append(np.array(0))
 
     return X_pg, X_sg, Y_pg, Y_sg
+
+def read_max_img_paths(filepath):
+    path_list = []
+    with open(filepath, "r") as file:
+        for line in file:
+            line = line.strip()
+            img_path = line.split(" ")[-1]
+            path_list.append(img_path)
+    
+    return path_list
+
+def read_max_models(filepath):
+    models = dict()
+    with open(filepath, "r") as file:
+        for line in file:
+            line = line.strip()
+            ID = line.split(":")[0]
+            model = line.split(" ")[-1]
+            models[ID] = model
+    
+    return models
+
+def read_xls_data(filepath):
+    total_data = pd.read_excel(filepath, sheet_name=None)
+    NORMAL_SJS, NONSJS_SJS = pd.DataFrame(), pd.DataFrame()
+    resid_num = 1
+    for sheet in list(total_data.keys()):
+        curr_sheet = total_data[sheet]
+        if resid_num < 4:
+            if resid_num == 1: NORMAL_SJS["ID"] = curr_sheet.ID
+            NORMAL_SJS[f"diag{resid_num}"] = curr_sheet.Diagnosis
+        else:
+            if resid_num == 4: NONSJS_SJS["ID"] = curr_sheet.ID
+            NONSJS_SJS[f"diag{resid_num}"] = curr_sheet.Diagnosis
+        resid_num += 1
+    return NORMAL_SJS, NONSJS_SJS

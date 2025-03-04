@@ -84,10 +84,11 @@ for pred in resident6:
     elif pred == 3: preds6.append(0.66)
     else: preds6.append(1)
 
-roc_curve(preds1, NORMAL_label, 1)
-roc_curve(preds2, NORMAL_label, 2)
-roc_curve(preds3, NORMAL_label, 3)
+if __name__ == "__main__":
+    roc_curve(preds1, NORMAL_label, 1)
+    roc_curve(preds2, NORMAL_label, 2)
+    roc_curve(preds3, NORMAL_label, 3)
 
-roc_curve(preds4, NONSJS_label, 4)
-roc_curve(preds5, NONSJS_label, 5)
-roc_curve(preds6, NONSJS_label, 6)
+    roc_curve(preds4, NONSJS_label, 4)
+    roc_curve(preds5, NONSJS_label, 5)
+    roc_curve(preds6, NONSJS_label, 6)

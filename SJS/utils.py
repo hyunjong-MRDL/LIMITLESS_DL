@@ -3,7 +3,7 @@ import torchvision.transforms as transforms
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import defaultdict
-# from sklearn.metrics import roc_auc_score, roc_curve
+from sklearn.metrics import roc_auc_score, roc_curve
 
 def seed_everything(seed):
     random.seed(seed)
@@ -25,7 +25,7 @@ device = "cuda" if torch.cuda.is_available() else 'cpu'
 #      'BATCH_SIZE' : 4,
 #      'LR' : 1e-4}
 
-control_group = "NON_SJS"  # NORMAL or NON_SJS
+control_group = "NONSJS"  # NORMAL or NONSJS
 
 CFG={'SEED' : 46,  # 42~46
      'IMG_SIZE' : 224,

@@ -1,11 +1,8 @@
-import torch, timm, PIL
-import numpy as np
+import torch, PIL
 import matplotlib.pyplot as plt
 import data, models, utils
-import torchvision.transforms as transforms
 from torchcam.methods import SmoothGradCAMpp
-from torchvision.io.image import read_image
-from torchvision.transforms.functional import normalize, resize, to_pil_image
+from torchvision.transforms.functional import to_pil_image
 from torchcam.utils import overlay_mask
 
 utils.seed_everything(utils.CFG["SEED"])
@@ -14,9 +11,9 @@ device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cp
 
 root = "D:/Datasets/SJS/"
 processed_root = f"{root}Processed/"
-plot_root = "E:/LIMITLESS_DL/SJS/Plot/"
-max_img_path = "C:/Users/PC00/Desktop/SJS max_output images.txt"
-max_model_path = "C:/Users/PC00/Desktop/SJS max_models.txt"
+CAM_root = "E:/Results/SJS/Figures/CAM/Trained/"
+max_img_path = f"C:/Users/PC00/Desktop/SJS/{utils.control_group}_max_output_images.txt"
+max_model_path = f"C:/Users/PC00/Desktop/SJS/{utils.control_group}_max_models.txt"
 
 total_SJS = data.split_by_patient(data.load_by_diagnosis(processed_root, "SJS"))
 total_CTR = data.split_by_patient(data.load_by_diagnosis(processed_root, utils.control_group))
@@ -32,10 +29,10 @@ PG_VGG = models.VGG16().to(device)
 SG_ResNet = models.ResNet().to(device)
 SG_VGG = models.VGG16().to(device)
 
-# PG_RES_target_layer = PG_ResNet.layer4[2].conv3
-# PG_VGG_target_layer = PG_VGG.pre_logits.fc2
-# SG_RES_target_layer = SG_ResNet.layer4[2].conv3
-# SG_VGG_target_layer = SG_VGG.pre_logits.fc2
+PG_RES_target_layer = PG_ResNet.model.layer4[2].conv3
+PG_VGG_target_layer = PG_VGG.model.pre_logits.fc2
+SG_RES_target_layer = SG_ResNet.model.layer4[2].conv3
+SG_VGG_target_layer = SG_VGG.model.pre_logits.fc2
 
 X_pg, X_sg, Y_pg, Y_sg = data.gland_dataset(test_SJS, test_CTR)
 
@@ -50,10 +47,6 @@ SG_VGG.eval()
 pg_patients = list(Y_pg.keys())
 sg_patients = list(Y_sg.keys())
 
-utils.createFolder(plot_root)
-utils.createFolder(f"{plot_root}SJS_NONSJS/")
-utils.createFolder(f"{plot_root}SJS_NORMAL/")
-
 for image in selected_images:
     diagnosis = image.split("/")[4]
     gland = image.split("/")[-1].split("_")[0]
@@ -63,17 +56,24 @@ for image in selected_images:
     if gland == "PTG":
         if selected_model == "ResNet":
             model = PG_ResNet
+            target_layer = PG_RES_target_layer
         elif selected_model == "VGG":
             model = PG_VGG
+            target_layer = PG_VGG_target_layer
         else: continue
     elif gland == "SMG":
         if selected_model == "ResNet":
             model = SG_ResNet
+            target_layer = SG_RES_target_layer
         elif selected_model == "VGG":
             model = SG_VGG
+            target_layer = SG_VGG_target_layer
         else: continue
     
-    image_name = f"{plot_root}SJS_NONSJS/{diagnosis}/{ID}_{gland}_{selected_model}.jpg"
+    save_folder = f"{CAM_root}{utils.control_group}_SJS/{diagnosis}/"
+    utils.createFolder(save_folder)
+    
+    image_name = f"{save_folder}{ID}_{gland}_{selected_model}.jpg"
 
     """(1) Transform the image and put it into the model."""
     transformed = utils.preprocessing(PIL.Image.open(image)).float().unsqueeze(0).to(device)

@@ -86,16 +86,6 @@ def gland_dataset(SJS_by_patient, CTR_by_patient):
 
     return X_pg, X_sg, Y_pg, Y_sg
 
-def read_max_img_paths(filepath):
-    path_list = []
-    with open(filepath, "r") as file:
-        for line in file:
-            line = line.strip()
-            img_path = line.split(" ")[-1]
-            path_list.append(img_path)
-    
-    return path_list
-
 def read_max_models(filepath):
     models = dict()
     with open(filepath, "r") as file:
@@ -106,6 +96,16 @@ def read_max_models(filepath):
             models[ID] = model
     
     return models
+
+def read_max_img_paths(filepath):
+    path_list = []
+    with open(filepath, "r") as file:
+        for line in file:
+            line = line.strip()
+            img_path = line.split(" ")[-1]
+            path_list.append(img_path)
+    
+    return path_list
 
 def read_xls_data(filepath):
     total_data = pd.read_excel(filepath, sheet_name=None)

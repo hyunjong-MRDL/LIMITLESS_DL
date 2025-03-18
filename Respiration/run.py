@@ -1,7 +1,7 @@
 import data, utils, processing, metric, plot
 import numpy as np
 
-root = 'E:/LIMITLESS_DL/Respiration/'
+root = "E:/LIMITLESS_DL/Respiration/"
 data_root = f"{root}DATA/"
 result_root = f"{root}RESULTS/"
 
@@ -14,18 +14,18 @@ while True:
     proceed = int(input("Please enter '1' if you want to proceed, or enter '0': "))
     print()
     if proceed == 0: break
-    treatment = input("Desired Treatment Method [Type 'STATIC' or 'ARC']: ")
+    datatype = input("Select Data Type: ") # 데이터 root 폴더의 핵심 단어 입력
     print()
     breath = input("Desired Breath Type: [Type 'Breathhold' or 'FULL']: ")
     print()
 
-    patient_path, num_fx = data.patient_path(data_root, treatment, breath)
+    patient_path, num_fx = data.patient_path(data_root, datatype, breath)
     patient_ID = utils.extract_patientID(patient_path)
     result_folder = f"{result_root}MTG_{num_attempts}/{patient_ID}/"
     utils.createFolder(result_folder)
 
     with open(f"{result_folder}metric.txt", "w") as f:
-        patient_path, num_fx = data.patient_path(data_root, treatment, breath)
+        patient_path, num_fx = data.patient_path(data_root, datatype, breath)
         total_levels, total_errors, total_stds = [], [], []
 
         for fx in range(1, num_fx+1):

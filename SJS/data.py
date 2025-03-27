@@ -1,25 +1,35 @@
 import os, random
 import numpy as np
 import pandas as pd
+from torch.utils.data import Dataset
 from collections import defaultdict
 
 """Abbreviations"""
 # pt.: patient
 
-def load_by_diagnosis(root, diagnosis):
-    diagnosis_path = f"{root}{diagnosis}/"
-    diagnosis_data = [] # PTG/SMG combined -> needs to be classified
+def path_by_diagnosis(root, diagnosis):
+    diagnosis_path = os.path.join(root, diagnosis)
+    data_list = [] # PG/SG are indistinguishable
     for data_path in os.listdir(diagnosis_path):
-        diagnosis_data.append(f"{diagnosis_path}{data_path}")
-    return diagnosis_data
+        data_list.append(os.path.join(diagnosis_path, data_path))
+    return data_list
 
-def split_by_patient(diagnosis_data):
-    patient_paths = defaultdict(list)
-    for fullname in diagnosis_data:
+def ID_summary(data_list):
+    """Two lists [ID], [data_path]"""
+    ID_list = []
+    for fullname in data_list:
         data_name = fullname.split("/")[-1] # "~~~.jpg"
         ID = data_name.split("_")[1].split("-")[0]
-        patient_paths[ID].append(fullname)
-    return patient_paths
+        if ID not in ID_list:
+            ID_list.append(ID)
+    return ID_list
+
+def path_by_IDs(ID_list, data_list):
+    total_data = []
+    for ID in ID_list:
+        curr_list = [datapath for datapath in data_list if ID in datapath]
+        total_data.append(curr_list)
+    return total_data
 
 def split_by_gland(diagnosis_data):
     patient_paths = defaultdict(list)

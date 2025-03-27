@@ -1,9 +1,8 @@
 import data, utils, processing, metric
 import numpy as np
 
-root = 'E:/LIMITLESS_DL/Respiration/'
-data_root = f"{root}DATA/"
-result_root = f"{root}RESULTS/"
+data_root = "D:/Datasets/Respiration/"
+result_root = "E:/Results/Respiration/"
 
 num_attempts = 2 # MTG_{number}
 

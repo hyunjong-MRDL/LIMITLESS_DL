@@ -1,7 +1,0 @@
-	  Average Levels	Vertical Errors
-Mean [mm]:	12.38296	1.10751
-STD [mm]:	0.22682	0.22968
-CV: 	1.83170%	20.73810%
-Reproducibility [mm]:	0.96052
-Stability [mm]:	1.78336
-

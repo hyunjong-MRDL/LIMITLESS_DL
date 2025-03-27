@@ -26,18 +26,10 @@ total_CTR = data.split_by_patient(data.load_by_diagnosis(processed_root, control
 train_SJS, test_SJS = data.train_test_split(total_SJS, utils.CFG["TEST_PORTION"])
 train_CTR, test_CTR = data.train_test_split(total_CTR, utils.CFG["TEST_PORTION"])
 
-selected_images = data.read_max_img_paths(max_img_path)
-selected_models = data.read_max_models(max_model_path)
-
 PG_ResNet = models.ResNet().to(device)
 PG_VGG = models.VGG16().to(device)
 SG_ResNet = models.ResNet().to(device)
 SG_VGG = models.VGG16().to(device)
-
-PG_RES_target_layer = PG_ResNet.model.layer4[2].conv3
-PG_VGG_target_layer = PG_VGG.model.pre_logits.fc2
-SG_RES_target_layer = SG_ResNet.model.layer4[2].conv3
-SG_VGG_target_layer = SG_VGG.model.pre_logits.fc2
 
 X_pg, X_sg, Y_pg, Y_sg = data.gland_dataset(test_SJS, test_CTR)
 

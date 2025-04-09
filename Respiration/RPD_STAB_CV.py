@@ -4,8 +4,15 @@ import pandas as pd
 
 result_root = "E:\\Results\\Respiration\\"
 
-meeting_number = 4
+print()
+print("호흡 데이터 분석을 시작합니다.")
+print()
+
+meeting_number = int(input("미팅 회차를 명시해주세요: "))
+print()
+
 curr_result_path = os.path.join(result_root, f"MTG_{meeting_number}")
+os.makedirs(curr_result_path, exist_ok=True)
 del result_root, meeting_number
 
 organized_data_path = os.path.join(curr_result_path, "Organized_Data")
@@ -18,7 +25,8 @@ for datatype in os.listdir(organized_data_path):
     print(f"=== 현재 {datatype} 데이터를 분석 중입니다 ===")
     print()
     total_results = dict()
-    total_patients, total_reprods, total_stabs = [], [], []
+    total_patients = []
+    total_reprods, total_inter_stabs, total_intra_stabs = [], [], []
     total_mean_LVL, total_std_LVL, total_CV_LVL = [], [], []
     total_mean_VD, total_std_VD, total_CV_VD = [], [], []
 
@@ -29,14 +37,20 @@ for datatype in os.listdir(organized_data_path):
         curr_data_filename = os.path.join(curr_type_data_path, patient_name)
         curr_data = pd.read_excel(curr_data_filename)
 
+        # Inter-fraction Reproducibility & Stability
+        inter_rpds, inter_stbs = list(curr_data["Inter_RPD"]), list(curr_data["Inter_STB"])
+
         # 각 fraction별 모든 field에 대한 LVL, VD의 평균 및 표준편차
-        LVL_means, VD_means = list(curr_data["LVL Mean"]), list(curr_data["VD Mean"])
+        LVL_means, VD_means = list(curr_data["LVL_Mean"]), list(curr_data["VD_Mean"])
 
         # 모든 fraction에 대한 LVL, VD에 기반한 Reproducibility 및 Stability 계산
-        reprod = data_new.reproducibility(LVL_means)
-        total_reprods.append( round(reprod, 4) )
-        stab = data_new.stability(VD_means)
-        total_stabs.append( round(stab, 4) )
+        mean_inter_reprod = round( np.mean(inter_rpds), 4 )
+        total_reprods.append(mean_inter_reprod)
+        mean_inter_stab = round( np.mean(inter_stbs), 4 )
+        total_inter_stabs.append(mean_inter_stab)
+
+        intra_stab = data_new.stability(VD_means)
+        total_intra_stabs.append( round(intra_stab, 4) )
 
         # 모든 fraction에 걸친 LVL 및 VD의 평균 및 표준편차
         mean_LVL, mean_VD = np.mean(LVL_means).item(), np.mean(VD_means).item()
@@ -49,7 +63,8 @@ for datatype in os.listdir(organized_data_path):
         total_CV_VD.append( round(std_VD/mean_VD, 4) )
     total_results["Patient"] = total_patients
     total_results["Reproducibility"] = total_reprods
-    total_results["Stability"] = total_stabs
+    total_results["Inter_STB"] = total_inter_stabs
+    total_results["Intra_STB"] = total_intra_stabs
     total_results["Mean_LVL"] = total_mean_LVL
     total_results["STD_LVL"] = total_std_LVL
     total_results["CV_LVL"] = total_CV_LVL

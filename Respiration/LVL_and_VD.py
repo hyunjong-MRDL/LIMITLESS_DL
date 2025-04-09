@@ -1,6 +1,4 @@
 import os, data_new
-import numpy as np
-import pandas as pd
 
 """Data Root 디렉토리에 있는 모든 데이터를 한꺼번에 분석해서 Excel파일로 저장하는 코드"""
 

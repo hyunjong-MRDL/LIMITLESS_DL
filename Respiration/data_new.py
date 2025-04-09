@@ -199,10 +199,12 @@ def fraction_analysis(list_of_field_data):
             total_intv_errors += vertical_error
         per_field_levels.append( (total_intv_levels / num_intervals) )
         per_field_errors.append( (total_intv_errors / num_intervals) )
+    inter_reprod = reproducibility(per_field_levels)
+    inter_stab = stability(per_field_errors)
     level_mean, error_mean = np.mean(per_field_levels), np.mean(per_field_errors)
     level_std, error_std = np.std(per_field_levels), np.std(per_field_errors)
 
-    return level_mean, error_mean, level_std, error_std
+    return round(inter_reprod, 4), round(level_mean, 4), round(level_std, 4), round(inter_stab, 4), round(error_mean, 4), round(error_std, 4)
 
 def batch_processing(total_patients):
     total_results = dict()
@@ -226,24 +228,58 @@ def save_results(analyzed_results, result_root, data_type):
     curr_result_directory = os.path.join(result_root, data_type)
     os.makedirs(curr_result_directory, exist_ok=True)
     for patient_ID in sorted(list(analyzed_results.keys())):
+        inter_rpds, inter_stbs = [], []
         level_means, error_means = [], []
         level_stds, error_stds = [], []
+        level_cvs, error_cvs = [], []
         curr_ID = patient_ID.split("\\")[-1]
         curr_fractions = sorted(list(analyzed_results[patient_ID].keys()), key=int)
         patient_results = pd.DataFrame()
         for fraction in curr_fractions:
-            lvl_mean, err_mean, lvl_std, err_std = analyzed_results[patient_ID][fraction]
+            inter_reprod, lvl_mean, lvl_std, inter_stab, err_mean, err_std = analyzed_results[patient_ID][fraction]
+            inter_rpds.append(inter_reprod)
+            inter_stbs.append(inter_stab)
             level_means.append(lvl_mean)
-            error_means.append(err_mean)
             level_stds.append(lvl_std)
+            level_cvs.append(lvl_std / lvl_mean)
+            error_means.append(err_mean)
             error_stds.append(err_std)
-        patient_results["LVL Mean"] = level_means
-        patient_results["VD Mean"] = error_means
-        patient_results["LVL STD"] = level_stds
-        patient_results["VD STD"] = error_stds
+            error_cvs.append(err_std / err_mean)
+        patient_results["Inter_RPD"] = inter_rpds
+        patient_results["LVL_Mean"] = level_means
+        patient_results["LVL_STD"] = level_stds
+        patient_results["LVL_CV"] = level_cvs
+        patient_results["Inter_STB"] = inter_stbs
+        patient_results["VD_Mean"] = error_means
+        patient_results["VD_STD"] = error_stds
+        patient_results["VD_CV"] = error_cvs
         curr_result_filename = f"{curr_result_directory}/{curr_ID}.xlsx"
         patient_results.to_excel(curr_result_filename)
     return
 
-def plot_field_data():
+"""Check if there's any correlation between fractions"""
+def plot_by_fx(patient_data, plot_root):
+    datatype = os.path.dirname(patient_data).split("\\")[-1]
+    dir_by_datatype = os.path.join(plot_root, datatype)
+    os.makedirs(dir_by_datatype, exist_ok=True)
+    patient_ID = os.path.basename(patient_data).split("_")[0]
+    df = pd.read_excel(patient_data)
+    lvl_mean = df["LVL_Mean"]
+    lvl_std = df["LVL_STD"]
+    lvl_cv = df["LVL_CV"]
+    vd_mean = df["VD_Mean"]
+    vd_std = df["VD_STD"]
+    vd_cv = df["VD_CV"]
+    x = range(len(lvl_std))
+    fig, axes = plt.subplots(2, 3, figsize=(30, 15))
+    fig.suptitle("Metrics over fractions")
+    axes[0][0].plot(x, lvl_mean), axes[0][0].set_title("Average Level (Mean)")
+    axes[0][1].plot(x, lvl_std), axes[0][1].set_title("Average Level (STD)")
+    axes[0][2].plot(x, lvl_cv), axes[0][2].set_title("Average Level (CV)")
+    axes[1][0].plot(x, vd_mean), axes[1][0].set_title("Vertical Distance (Mean)")
+    axes[1][1].plot(x, vd_std), axes[1][1].set_title("Vertical Distance (STD)")
+    axes[1][2].plot(x, vd_cv), axes[1][2].set_title("Vertical Distance (CV)")
+    filename_to_save = os.path.join(dir_by_datatype, f"{patient_ID}.jpg")
+    fig.savefig(filename_to_save)
+    plt.close()
     return

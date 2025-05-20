@@ -130,7 +130,7 @@ def regression_line(intv_Amps):
     Times = [t*dt for t in range(len(intv_Amps))]
     slope, intercept = np.polyfit(Times, intv_Amps, deg=1)
     fitted_line = [slope*t+intercept for t in Times]
-    return fitted_line
+    return slope, fitted_line
 
 def dilate_metrics(data_Times, beam_Times, avg_lvls, fitted_lines):
     dilated_avgs = np.zeros(len(data_Times))

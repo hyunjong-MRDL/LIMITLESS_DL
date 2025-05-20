@@ -1,4 +1,9 @@
 from scipy.stats import shapiro, levene, bartlett
+from scipy.stats import mannwhitneyu
+
+def run_wilcoxon_rank_sum(group1, group2, alternative='two-sided'):
+    stat, p = mannwhitneyu(group1, group2, alternative=alternative)
+    return stat, p
 
 def check_normality_and_homoscedasticity(merged_data, use_bartlett=True, alpha=0.05):
     result = {}

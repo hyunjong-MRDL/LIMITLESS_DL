@@ -1,4 +1,4 @@
-import os, data_new
+import os, data
 import numpy as np
 import pandas as pd
 
@@ -49,7 +49,7 @@ for datatype in os.listdir(organized_data_path):
         mean_inter_stab = round( np.mean(inter_stbs), 4 )
         total_inter_stabs.append(mean_inter_stab)
 
-        intra_stab = data_new.stability(VD_means)
+        intra_stab = data.stability(VD_means)
         total_intra_stabs.append( round(intra_stab, 4) )
 
         # 모든 fraction에 걸친 LVL 및 VD의 평균 및 표준편차

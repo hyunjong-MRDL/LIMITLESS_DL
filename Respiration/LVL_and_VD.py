@@ -1,4 +1,4 @@
-import os, data_new
+import os, data
 
 """Data Root 디렉토리에 있는 모든 데이터를 한꺼번에 분석해서 Excel파일로 저장하는 코드"""
 
@@ -20,7 +20,7 @@ organized_save_path = os.path.join(curr_result_path, "Organized_Data")
 os.makedirs(organized_save_path, exist_ok=True)
 del curr_result_path
 
-total_list = data_new.patient_listing(data_root)
+total_list = data.patient_listing(data_root)
 datatype_list = list(total_list.keys())
 del data_root
 
@@ -48,9 +48,7 @@ del total_list
 print(f"선택하신 데이터에는 총 {len(patient_list)}명의 환자가 있습니다.")
 print()
 
-# print(There are (?) fractions for this patient)
-
-total_results = data_new.batch_processing(patient_list)
+total_results = data.batch_processing(patient_list)
 del patient_list
 
-data_new.save_results(total_results, organized_save_path, selected_type)
+data.save_results(total_results, organized_save_path, selected_type)

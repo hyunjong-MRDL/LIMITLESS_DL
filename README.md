@@ -39,18 +39,7 @@
 * Model
     * ResNet50
 
-## **4. Performance Analysis on DL aided CT reconstruction (Canon)**
-* Purpose
-    * Canon developed a DL aided CT reconstruction algorithm.
-    * It helps reconstruction with higher resolution, which can help better diagnosis.
-    * This project aims to confirm the validity of this new technique.
-* Dataset
-    * Description: RT structures
-    * Format: DICOM file
-* Method
-    * Compare the IoU & Dice coefficient of images reconstructed from previous technology and the new one.
-
-## **5. Analysis of Respiration during radiotherapies (YUMC)**
+## **4. Analysis of Respiration during radiotherapies (YUMC)**
 * Purpose
     * Maintaining constant respiration during radiotherapies is crucial.
     * Respiration skills are known to be trainable.
@@ -58,20 +47,3 @@
 * Dataset
     * Description: Time series data of patient's ventral movement (Anterior-Posterior)
     * Format: Text file
-
-## **6. Autism Spectrum Disorder (Classfication)**
-* Purpose
-    * Classify ASD patients from normal class
-* Dataset
-    * Description: 3D MR brain images
-    * Format: Nifti file
-    * Image Size: (256, 256, 256)
-* Model
-    * 3D-ResNet
-
-## **7. Solving Jigsaw Puzzle using Deep Learning Model**
-* Dataset
-    * Format: JPG file
-    * Image Size: (3, 224, 224) -> RGB
-* Model:
-    * Vision Transformer
